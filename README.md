@@ -10,6 +10,10 @@ Interactive HTML dashboards for visualizing hospital POC (Point of Care) data.
 - **dashboard_data.json** - Dashboard data output
 - **Hospital POC Base Data.xlsx** - Source data file (upload via dashboard UI to refresh charts)
 
+## Live Dashboard
+
+https://moab-hub.github.io/Dashboards/hospital_dashboard.html
+
 ## Usage
 
-Open `hospital_dashboard.html` in a browser, then upload the latest `Hospital POC Base Data.xlsx` using the file picker to populate all charts and metrics.
+Open the link above or `hospital_dashboard.html` locally, then upload the latest `Hospital POC Base Data.xlsx` using the file picker to populate all charts and metrics.
