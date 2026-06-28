@@ -1,0 +1,3091 @@
+{
+  "hospitals": {
+    "Carrollton Springs": {
+      "payor_mix": {
+        "Commercial": {
+          "los": 32183,
+          "gross": 68032329.98,
+          "net": 21190086.46,
+          "admits": 4071,
+          "pct": 63.6,
+          "rev_per_day": 658.42,
+          "avg_los": 7.9
+        },
+        "Medicare Advantage": {
+          "los": 4790,
+          "gross": 11154855.94,
+          "net": 6488094.0,
+          "admits": 576,
+          "pct": 9.5,
+          "rev_per_day": 1354.51,
+          "avg_los": 8.3
+        },
+        "Medicare": {
+          "los": 3449,
+          "gross": 7911803.91,
+          "net": 6919548.7,
+          "admits": 432,
+          "pct": 6.8,
+          "rev_per_day": 2006.25,
+          "avg_los": 8.0
+        },
+        "Managed Medicaid": {
+          "los": 4456,
+          "gross": 9501129.43,
+          "net": 1873354.66,
+          "admits": 548,
+          "pct": 8.8,
+          "rev_per_day": 420.41,
+          "avg_los": 8.1
+        },
+        "Self Pay": {
+          "los": 1821,
+          "gross": 3594831.8,
+          "net": 1145436.01,
+          "admits": 275,
+          "pct": 3.6,
+          "rev_per_day": 629.01,
+          "avg_los": 6.6
+        },
+        "Other Governmental": {
+          "los": 3117,
+          "gross": 7064984.2,
+          "net": 4639131.8,
+          "admits": 372,
+          "pct": 6.2,
+          "rev_per_day": 1488.33,
+          "avg_los": 8.4
+        },
+        "Medicaid": {
+          "los": 791,
+          "gross": 678186.12,
+          "net": 119576.31,
+          "admits": 107,
+          "pct": 1.6,
+          "rev_per_day": 151.17,
+          "avg_los": 7.4
+        }
+      },
+      "top5_gross": {
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 2364,
+            "2Q25": 2784,
+            "3Q25": 2215,
+            "4Q25": 2756,
+            "1Q26": 2047
+          },
+          "total_gross": 24871243.67
+        },
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1991,
+            "2Q25": 2032,
+            "3Q25": 2525,
+            "4Q25": 2279,
+            "1Q26": 1242
+          },
+          "total_gross": 21322433.72
+        },
+        "Magellan": {
+          "qtr_los": {
+            "1Q25": 832,
+            "2Q25": 970,
+            "3Q25": 771,
+            "4Q25": 943,
+            "1Q26": 0
+          },
+          "total_gross": 8556750.84
+        },
+        "Medicare": {
+          "qtr_los": {
+            "1Q25": 655,
+            "2Q25": 774,
+            "3Q25": 808,
+            "4Q25": 757,
+            "1Q26": 455
+          },
+          "total_gross": 7911803.91
+        },
+        "Cigna": {
+          "qtr_los": {
+            "1Q25": 662,
+            "2Q25": 724,
+            "3Q25": 483,
+            "4Q25": 574,
+            "1Q26": 423
+          },
+          "total_gross": 5668268.0
+        }
+      },
+      "top5_gross_payors": [
+        "BCBS/Anthem",
+        "UBH",
+        "Magellan",
+        "Medicare",
+        "Cigna"
+      ],
+      "top5_net": {
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 2364,
+            "2Q25": 2784,
+            "3Q25": 2215,
+            "4Q25": 2756,
+            "1Q26": 2047
+          },
+          "total_net": 7098793.99
+        },
+        "Medicare": {
+          "qtr_los": {
+            "1Q25": 655,
+            "2Q25": 774,
+            "3Q25": 808,
+            "4Q25": 757,
+            "1Q26": 455
+          },
+          "total_net": 6919548.7
+        },
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1991,
+            "2Q25": 2032,
+            "3Q25": 2525,
+            "4Q25": 2279,
+            "1Q26": 1242
+          },
+          "total_net": 5867078.0
+        },
+        "VA": {
+          "qtr_los": {
+            "1Q25": 569,
+            "2Q25": 348,
+            "3Q25": 439,
+            "4Q25": 383,
+            "1Q26": 292
+          },
+          "total_net": 3854243.91
+        },
+        "Magellan": {
+          "qtr_los": {
+            "1Q25": 832,
+            "2Q25": 970,
+            "3Q25": 771,
+            "4Q25": 943,
+            "1Q26": 0
+          },
+          "total_net": 3157564.0
+        }
+      },
+      "top5_net_payors": [
+        "BCBS/Anthem",
+        "Medicare",
+        "UBH",
+        "VA",
+        "Magellan"
+      ],
+      "denial_rate": {
+        "Wellcare": {
+          "gross": 111650.7,
+          "net": 111650.7,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 35,
+          "admits": 4
+        },
+        "UBH": {
+          "gross": 3067954.27,
+          "net": 784471,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 1242,
+          "admits": 124
+        },
+        "Cigna": {
+          "gross": 997420.43,
+          "net": 314124,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 423,
+          "admits": 44
+        },
+        "BCBS/Anthem": {
+          "gross": 5160779.02,
+          "net": 1352348.85,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 2047,
+          "admits": 211
+        },
+        "Self Pay": {
+          "gross": 636482.96,
+          "net": 178629,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 224,
+          "admits": 33
+        },
+        "VA": {
+          "gross": 770802.65,
+          "net": 703312.83,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 292,
+          "admits": 22
+        },
+        "Other": {
+          "gross": 783634.12,
+          "net": 185339.47,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 272,
+          "admits": 32
+        },
+        "Medicare": {
+          "gross": 1126260.56,
+          "net": 940507.01,
+          "denial_adj": 7041.71,
+          "rate": 0.63,
+          "los": 455,
+          "admits": 44
+        },
+        "Ambetter": {
+          "gross": 853034.83,
+          "net": 266380,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 277,
+          "admits": 39
+        },
+        "Molina": {
+          "gross": 790460.82,
+          "net": 156105.35,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 267,
+          "admits": 32
+        },
+        "Cenpatico": {
+          "gross": 462988.92,
+          "net": 114541.73,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 146,
+          "admits": 19
+        },
+        "Aetna": {
+          "gross": 703037.74,
+          "net": 202305,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 328,
+          "admits": 28
+        },
+        "Amerigroup": {
+          "gross": 544951.38,
+          "net": 223517.0,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 215,
+          "admits": 24
+        },
+        "Tricare": {
+          "gross": 255480.16,
+          "net": 83228.78,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 108,
+          "admits": 10
+        },
+        "Parkland Community Health": {
+          "gross": 179926.32,
+          "net": 37800,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 56,
+          "admits": 2
+        },
+        "Healthspring": {
+          "gross": 239271.31,
+          "net": 179240.87,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 109,
+          "admits": 9
+        },
+        "Medicaid": {
+          "gross": 88838.61,
+          "net": 14544.6,
+          "denial_adj": 7791.75,
+          "rate": 8.77,
+          "los": 28,
+          "admits": 3
+        },
+        "SWHP": {
+          "gross": 281771.07,
+          "net": 67600,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 103,
+          "admits": 12
+        },
+        "Christus": {
+          "gross": 70685.34,
+          "net": 18766,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 22,
+          "admits": 3
+        },
+        "Humana": {
+          "gross": 631750.2,
+          "net": 602207.04,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 198,
+          "admits": 21
+        },
+        "Meritain": {
+          "gross": 22490.86,
+          "net": 6160,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 14,
+          "admits": 1
+        },
+        "Cook Children's Health Plan": {
+          "gross": 34860.72,
+          "net": 6875,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 11,
+          "admits": 1
+        },
+        "Allwell": {
+          "gross": 75504.8,
+          "net": 14600,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 24,
+          "admits": 4
+        },
+        "Champ VA": {
+          "gross": 22490.79,
+          "net": 22490.79,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 7,
+          "admits": 1
+        }
+      },
+      "qtr_summary": {
+        "1Q25": {
+          "los": 10555,
+          "gross": 21993118.98,
+          "net": 8695238.63,
+          "admits": 1365
+        },
+        "2Q25": {
+          "los": 11181,
+          "gross": 23143966.82,
+          "net": 9366502.94,
+          "admits": 1459
+        },
+        "3Q25": {
+          "los": 10679,
+          "gross": 21703016.79,
+          "net": 8650348.82,
+          "admits": 1448
+        },
+        "4Q25": {
+          "los": 11289,
+          "gross": 23185490.21,
+          "net": 9076392.53,
+          "admits": 1386
+        },
+        "1Q26": {
+          "los": 6903,
+          "gross": 17912528.58,
+          "net": 6586745.02,
+          "admits": 723
+        }
+      },
+      "program_mix": {
+        "PHP": {
+          "los": 10133,
+          "gross": 14935103.63,
+          "net": 3758231.51,
+          "admits": 1265
+        },
+        "IOP": {
+          "los": 8388,
+          "gross": 7359183.28,
+          "net": 1907162.85,
+          "admits": 1452
+        },
+        "Inpatient": {
+          "los": 32086,
+          "gross": 85643834.47,
+          "net": 36709833.58,
+          "admits": 3664
+        }
+      },
+      "totals": {
+        "los": 50607,
+        "gross": 107938121.38,
+        "net": 42375227.94,
+        "admits": 6381
+      }
+    },
+    "Collin Springs": {
+      "payor_mix": {
+        "Commercial": {
+          "los": 24393,
+          "gross": 52807782.77,
+          "net": 16281748.34,
+          "admits": 3001,
+          "pct": 59.1,
+          "rev_per_day": 667.48,
+          "avg_los": 8.1
+        },
+        "Managed Medicaid": {
+          "los": 9217,
+          "gross": 20329939.09,
+          "net": 4118985.84,
+          "admits": 1124,
+          "pct": 22.3,
+          "rev_per_day": 446.89,
+          "avg_los": 8.2
+        },
+        "Medicare": {
+          "los": 806,
+          "gross": 2126430.86,
+          "net": 2077178.83,
+          "admits": 83,
+          "pct": 2.0,
+          "rev_per_day": 2577.14,
+          "avg_los": 9.7
+        },
+        "Other Governmental": {
+          "los": 3389,
+          "gross": 8661447.62,
+          "net": 3557724.06,
+          "admits": 397,
+          "pct": 8.2,
+          "rev_per_day": 1049.79,
+          "avg_los": 8.5
+        },
+        "Medicare Advantage": {
+          "los": 2106,
+          "gross": 5579399.95,
+          "net": 3233704.64,
+          "admits": 240,
+          "pct": 5.1,
+          "rev_per_day": 1535.47,
+          "avg_los": 8.8
+        },
+        "Self Pay": {
+          "los": 1007,
+          "gross": 2559102.66,
+          "net": 836150,
+          "admits": 144,
+          "pct": 2.4,
+          "rev_per_day": 830.34,
+          "avg_los": 7.0
+        },
+        "Medicaid": {
+          "los": 347,
+          "gross": 459308.4,
+          "net": 83654.4,
+          "admits": 43,
+          "pct": 0.8,
+          "rev_per_day": 241.08,
+          "avg_los": 8.1
+        }
+      },
+      "top5_gross": {
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1998,
+            "2Q25": 2396,
+            "3Q25": 1782,
+            "4Q25": 2236,
+            "1Q26": 1794
+          },
+          "total_gross": 21751828.37
+        },
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1449,
+            "2Q25": 1203,
+            "3Q25": 1179,
+            "4Q25": 1249,
+            "1Q26": 828
+          },
+          "total_gross": 13450895.11
+        },
+        "Amerigroup": {
+          "qtr_los": {
+            "1Q25": 1017,
+            "2Q25": 1325,
+            "3Q25": 732,
+            "4Q25": 989,
+            "1Q26": 926
+          },
+          "total_gross": 10290110.14
+        },
+        "Aetna": {
+          "qtr_los": {
+            "1Q25": 674,
+            "2Q25": 655,
+            "3Q25": 656,
+            "4Q25": 493,
+            "1Q26": 348
+          },
+          "total_gross": 6085229.12
+        },
+        "Other": {
+          "qtr_los": {
+            "1Q25": 77,
+            "2Q25": 129,
+            "3Q25": 624,
+            "4Q25": 801,
+            "1Q26": 529
+          },
+          "total_gross": 5912664.88
+        }
+      },
+      "top5_gross_payors": [
+        "BCBS/Anthem",
+        "UBH",
+        "Amerigroup",
+        "Aetna",
+        "Other"
+      ],
+      "top5_net": {
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1998,
+            "2Q25": 2396,
+            "3Q25": 1782,
+            "4Q25": 2236,
+            "1Q26": 1794
+          },
+          "total_net": 6063946.74
+        },
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1449,
+            "2Q25": 1203,
+            "3Q25": 1179,
+            "4Q25": 1249,
+            "1Q26": 828
+          },
+          "total_net": 3821623.63
+        },
+        "Amerigroup": {
+          "qtr_los": {
+            "1Q25": 1017,
+            "2Q25": 1325,
+            "3Q25": 732,
+            "4Q25": 989,
+            "1Q26": 926
+          },
+          "total_net": 2220371.16
+        },
+        "Medicare": {
+          "qtr_los": {
+            "1Q25": 290,
+            "2Q25": 186,
+            "3Q25": 134,
+            "4Q25": 122,
+            "1Q26": 74
+          },
+          "total_net": 2077178.83
+        },
+        "Aetna": {
+          "qtr_los": {
+            "1Q25": 674,
+            "2Q25": 655,
+            "3Q25": 656,
+            "4Q25": 493,
+            "1Q26": 348
+          },
+          "total_net": 1910953.99
+        }
+      },
+      "top5_net_payors": [
+        "BCBS/Anthem",
+        "UBH",
+        "Amerigroup",
+        "Medicare",
+        "Aetna"
+      ],
+      "denial_rate": {
+        "Other": {
+          "gross": 1619001.11,
+          "net": 390938.79,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 529,
+          "admits": 70
+        },
+        "Molina": {
+          "gross": 698334.61,
+          "net": 135904.86,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 241,
+          "admits": 32
+        },
+        "UBH": {
+          "gross": 2269942.59,
+          "net": 632582.48,
+          "denial_adj": 5389.5,
+          "rate": 0.24,
+          "los": 828,
+          "admits": 94
+        },
+        "Amerigroup": {
+          "gross": 2166869.38,
+          "net": 471835.88,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 926,
+          "admits": 107
+        },
+        "BCBS/Anthem": {
+          "gross": 4557567.73,
+          "net": 1147658.8,
+          "denial_adj": 7536.2,
+          "rate": 0.17,
+          "los": 1794,
+          "admits": 192
+        },
+        "Cigna": {
+          "gross": 879870.4,
+          "net": 266574,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 401,
+          "admits": 39
+        },
+        "Aetna": {
+          "gross": 856955.01,
+          "net": 252400,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 348,
+          "admits": 38
+        },
+        "Meritain": {
+          "gross": 125305.99,
+          "net": 38280,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 57,
+          "admits": 3
+        },
+        "Tricare": {
+          "gross": 607403.94,
+          "net": 181684.44,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 206,
+          "admits": 21
+        },
+        "Cook Children's Health Plan": {
+          "gross": 271817.25,
+          "net": 87125.0,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 85,
+          "admits": 10
+        },
+        "Cenpatico": {
+          "gross": 531746.59,
+          "net": 105215,
+          "denial_adj": 3750,
+          "rate": 0.71,
+          "los": 177,
+          "admits": 22
+        },
+        "Self Pay": {
+          "gross": 253499.79,
+          "net": 72425,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 94,
+          "admits": 17
+        },
+        "SWHP": {
+          "gross": 215391.26,
+          "net": 75554.07,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 83,
+          "admits": 12
+        },
+        "Parkland Community Health": {
+          "gross": 255752.4,
+          "net": 54000,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 80,
+          "admits": 11
+        },
+        "Ambetter": {
+          "gross": 236795.88,
+          "net": 74000,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 74,
+          "admits": 11
+        },
+        "Medicaid": {
+          "gross": 97995.57,
+          "net": 18066.9,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 31,
+          "admits": 5
+        },
+        "Imagine Health": {
+          "gross": 67472.37,
+          "net": 22365,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 21,
+          "admits": 3
+        },
+        "Medicare": {
+          "gross": 237759.78,
+          "net": 237759.78,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 74,
+          "admits": 7
+        },
+        "VA": {
+          "gross": 83537.22,
+          "net": 83537.22,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 26,
+          "admits": 3
+        },
+        "Community Care": {
+          "gross": 38555.64,
+          "net": 26988.96,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 12,
+          "admits": 2
+        },
+        "Humana": {
+          "gross": 291898.22,
+          "net": 267501.42,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 101,
+          "admits": 11
+        },
+        "Healthspring": {
+          "gross": 99602.07,
+          "net": 99602.07,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 31,
+          "admits": 4
+        },
+        "Champ VA": {
+          "gross": 102815.04,
+          "net": 102815.04,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 32,
+          "admits": 3
+        },
+        "SoonerCare OK": {
+          "gross": 12851.88,
+          "net": 2098.8,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 4,
+          "admits": 1
+        },
+        "Christus": {
+          "gross": 19277.82,
+          "net": 5118,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 6,
+          "admits": 1
+        },
+        "Healthscope": {
+          "gross": 25703.76,
+          "net": 25703.76,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 8,
+          "admits": 1
+        }
+      },
+      "qtr_summary": {
+        "1Q25": {
+          "los": 9071,
+          "gross": 19253352.83,
+          "net": 6340311.86,
+          "admits": 1139
+        },
+        "2Q25": {
+          "los": 9448,
+          "gross": 19908861.78,
+          "net": 6455388.26,
+          "admits": 1130
+        },
+        "3Q25": {
+          "los": 8015,
+          "gross": 17681986.64,
+          "net": 6253141.0,
+          "admits": 1032
+        },
+        "4Q25": {
+          "los": 8462,
+          "gross": 19055486.8,
+          "net": 6262569.72,
+          "admits": 1011
+        },
+        "1Q26": {
+          "los": 6269,
+          "gross": 16623723.3,
+          "net": 4877735.27,
+          "admits": 720
+        }
+      },
+      "program_mix": {
+        "IOP": {
+          "los": 5557,
+          "gross": 4915834.3,
+          "net": 1184613.65,
+          "admits": 940
+        },
+        "Inpatient": {
+          "los": 26299,
+          "gross": 73686094.67,
+          "net": 25747307.95,
+          "admits": 3109
+        },
+        "PHP": {
+          "los": 9409,
+          "gross": 13921482.38,
+          "net": 3257224.51,
+          "admits": 983
+        }
+      },
+      "totals": {
+        "los": 41265,
+        "gross": 92523411.35,
+        "net": 30189146.11,
+        "admits": 5032
+      }
+    },
+    "Columbus Springs Dublin": {
+      "payor_mix": {
+        "Commercial": {
+          "los": 19618,
+          "gross": 36705569.91,
+          "net": 11902931.85,
+          "admits": 2764,
+          "pct": 41.5,
+          "rev_per_day": 606.74,
+          "avg_los": 7.1
+        },
+        "Medicare Advantage": {
+          "los": 4655,
+          "gross": 11422697.69,
+          "net": 9456375.46,
+          "admits": 646,
+          "pct": 9.8,
+          "rev_per_day": 2031.44,
+          "avg_los": 7.2
+        },
+        "Managed Medicaid": {
+          "los": 16496,
+          "gross": 39196729.39,
+          "net": 12171690.05,
+          "admits": 2526,
+          "pct": 34.9,
+          "rev_per_day": 737.86,
+          "avg_los": 6.5
+        },
+        "Medicare": {
+          "los": 2377,
+          "gross": 5997163.37,
+          "net": 5512249.84,
+          "admits": 365,
+          "pct": 5.0,
+          "rev_per_day": 2318.99,
+          "avg_los": 6.5
+        },
+        "Medicaid": {
+          "los": 1608,
+          "gross": 1006956.61,
+          "net": 248808.86,
+          "admits": 278,
+          "pct": 3.4,
+          "rev_per_day": 154.73,
+          "avg_los": 5.8
+        },
+        "Self Pay": {
+          "los": 717,
+          "gross": 1652992.88,
+          "net": 546258.44,
+          "admits": 133,
+          "pct": 1.5,
+          "rev_per_day": 761.87,
+          "avg_los": 5.4
+        },
+        "Other Governmental": {
+          "los": 1843,
+          "gross": 4655723.09,
+          "net": 1977575.81,
+          "admits": 287,
+          "pct": 3.9,
+          "rev_per_day": 1073.02,
+          "avg_los": 6.4
+        }
+      },
+      "top5_gross": {
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1702,
+            "2Q25": 2105,
+            "3Q25": 1863,
+            "4Q25": 1981,
+            "1Q26": 1449
+          },
+          "total_gross": 19496829.17
+        },
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1774,
+            "2Q25": 1970,
+            "3Q25": 1807,
+            "4Q25": 1771,
+            "1Q26": 1455
+          },
+          "total_gross": 17453293.43
+        },
+        "CareSource": {
+          "qtr_los": {
+            "1Q25": 1165,
+            "2Q25": 1166,
+            "3Q25": 1162,
+            "4Q25": 1316,
+            "1Q26": 983
+          },
+          "total_gross": 13908793.99
+        },
+        "Aetna": {
+          "qtr_los": {
+            "1Q25": 825,
+            "2Q25": 1008,
+            "3Q25": 1016,
+            "4Q25": 901,
+            "1Q26": 587
+          },
+          "total_gross": 8540238.36
+        },
+        "Molina": {
+          "qtr_los": {
+            "1Q25": 493,
+            "2Q25": 682,
+            "3Q25": 623,
+            "4Q25": 559,
+            "1Q26": 422
+          },
+          "total_gross": 6620355.71
+        }
+      },
+      "top5_gross_payors": [
+        "UBH",
+        "BCBS/Anthem",
+        "CareSource",
+        "Aetna",
+        "Molina"
+      ],
+      "top5_net": {
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1702,
+            "2Q25": 2105,
+            "3Q25": 1863,
+            "4Q25": 1981,
+            "1Q26": 1449
+          },
+          "total_net": 7656480.08
+        },
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1774,
+            "2Q25": 1970,
+            "3Q25": 1807,
+            "4Q25": 1771,
+            "1Q26": 1455
+          },
+          "total_net": 6747187.92
+        },
+        "Medicare": {
+          "qtr_los": {
+            "1Q25": 462,
+            "2Q25": 387,
+            "3Q25": 462,
+            "4Q25": 530,
+            "1Q26": 536
+          },
+          "total_net": 5512249.84
+        },
+        "CareSource": {
+          "qtr_los": {
+            "1Q25": 1165,
+            "2Q25": 1166,
+            "3Q25": 1162,
+            "4Q25": 1316,
+            "1Q26": 983
+          },
+          "total_net": 4638278.53
+        },
+        "Humana": {
+          "qtr_los": {
+            "1Q25": 496,
+            "2Q25": 673,
+            "3Q25": 506,
+            "4Q25": 496,
+            "1Q26": 476
+          },
+          "total_net": 3588753.41
+        }
+      },
+      "top5_net_payors": [
+        "UBH",
+        "BCBS/Anthem",
+        "Medicare",
+        "CareSource",
+        "Humana"
+      ],
+      "denial_rate": {
+        "Self Pay": {
+          "gross": 561142.41,
+          "net": 175063.48,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 207,
+          "admits": 32
+        },
+        "UBH": {
+          "gross": 3556736.19,
+          "net": 1247749.63,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 1449,
+          "admits": 186
+        },
+        "Humana": {
+          "gross": 1418567.4,
+          "net": 804240.09,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 476,
+          "admits": 61
+        },
+        "CareSource": {
+          "gross": 2811995.66,
+          "net": 934303.21,
+          "denial_adj": 431.06,
+          "rate": 0.02,
+          "los": 983,
+          "admits": 155
+        },
+        "Other": {
+          "gross": 902683.72,
+          "net": 327810.24,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 296,
+          "admits": 49
+        },
+        "BCBS/Anthem": {
+          "gross": 3399899.98,
+          "net": 1370373.48,
+          "denial_adj": 3674.16,
+          "rate": 0.11,
+          "los": 1455,
+          "admits": 172
+        },
+        "Buckeye": {
+          "gross": 489558.06,
+          "net": 124993.12,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 200,
+          "admits": 31
+        },
+        "Medicaid": {
+          "gross": 356306.1,
+          "net": 87382.57,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 156,
+          "admits": 21
+        },
+        "Medicare": {
+          "gross": 1610692.01,
+          "net": 1552872.03,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 536,
+          "admits": 66
+        },
+        "Molina": {
+          "gross": 1157869.35,
+          "net": 504161.07,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 422,
+          "admits": 56
+        },
+        "AmeriHealth": {
+          "gross": 511524.85,
+          "net": 142140,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 180,
+          "admits": 25
+        },
+        "Cigna": {
+          "gross": 558000.43,
+          "net": 186570,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 255,
+          "admits": 28
+        },
+        "Ohio Healthy": {
+          "gross": 262826.24,
+          "net": 80160,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 143,
+          "admits": 12
+        },
+        "Ambetter": {
+          "gross": 59279.28,
+          "net": 19000,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 19,
+          "admits": 4
+        },
+        "Medical Mutual": {
+          "gross": 305026.63,
+          "net": 145078.56,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 136,
+          "admits": 17
+        },
+        "Aetna": {
+          "gross": 1509118.86,
+          "net": 459824.0,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 587,
+          "admits": 74
+        },
+        "VA": {
+          "gross": 225389.77,
+          "net": 184303.99,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 77,
+          "admits": 11
+        },
+        "Wellcare": {
+          "gross": 22490.79,
+          "net": 22490.79,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 7,
+          "admits": 1
+        },
+        "Healthscope": {
+          "gross": 56227.06,
+          "net": 23304,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 26,
+          "admits": 4
+        },
+        "Ohio Health Choice": {
+          "gross": 28916.73,
+          "net": 9900,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 9,
+          "admits": 1
+        },
+        "Tricare": {
+          "gross": 35342.67,
+          "net": 16280,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 11,
+          "admits": 1
+        },
+        "Meritain": {
+          "gross": 16064.85,
+          "net": 5345,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 5,
+          "admits": 1
+        },
+        "Aultcare": {
+          "gross": 19277.82,
+          "net": 8430,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 6,
+          "admits": 1
+        },
+        "First Health": {
+          "gross": 16064.85,
+          "net": 10281.5,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 5,
+          "admits": 1
+        },
+        "Champ VA": {
+          "gross": 12851.88,
+          "net": 12851.88,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 4,
+          "admits": 1
+        }
+      },
+      "qtr_summary": {
+        "1Q25": {
+          "los": 9025,
+          "gross": 18171577.0,
+          "net": 7627368.25,
+          "admits": 1425
+        },
+        "2Q25": {
+          "los": 10727,
+          "gross": 21194481.67,
+          "net": 8432812.37,
+          "admits": 1577
+        },
+        "3Q25": {
+          "los": 9585,
+          "gross": 20142088.8,
+          "net": 8505074.81,
+          "admits": 1507
+        },
+        "4Q25": {
+          "los": 10327,
+          "gross": 21225831.88,
+          "net": 8795726.24,
+          "admits": 1479
+        },
+        "1Q26": {
+          "los": 7650,
+          "gross": 19903853.59,
+          "net": 8454908.64,
+          "admits": 1011
+        }
+      },
+      "program_mix": {
+        "IOP": {
+          "los": 7277,
+          "gross": 6429901.06,
+          "net": 2016035.15,
+          "admits": 1350
+        },
+        "Inpatient": {
+          "los": 29839,
+          "gross": 79070850.06,
+          "net": 35419302.23,
+          "admits": 4600
+        },
+        "PHP": {
+          "los": 10198,
+          "gross": 15137081.82,
+          "net": 4380552.93,
+          "admits": 1043
+        },
+        "OP": {
+          "los": 0,
+          "gross": 0,
+          "net": 0,
+          "admits": 6
+        }
+      },
+      "totals": {
+        "los": 47314,
+        "gross": 100637832.94,
+        "net": 41815890.31,
+        "admits": 6999
+      }
+    },
+    "Columbus Springs East": {
+      "payor_mix": {
+        "Medicare": {
+          "los": 1593,
+          "gross": 4222137.07,
+          "net": 4067974.73,
+          "admits": 218,
+          "pct": 4.4,
+          "rev_per_day": 2553.66,
+          "avg_los": 7.3
+        },
+        "Medicare Advantage": {
+          "los": 4308,
+          "gross": 10619287.51,
+          "net": 9079896.96,
+          "admits": 631,
+          "pct": 11.8,
+          "rev_per_day": 2107.68,
+          "avg_los": 6.8
+        },
+        "Medicaid": {
+          "los": 1725,
+          "gross": 986594.27,
+          "net": 279722.44,
+          "admits": 282,
+          "pct": 4.7,
+          "rev_per_day": 162.16,
+          "avg_los": 6.1
+        },
+        "Commercial": {
+          "los": 10022,
+          "gross": 20575279.27,
+          "net": 7042871.69,
+          "admits": 1594,
+          "pct": 27.5,
+          "rev_per_day": 702.74,
+          "avg_los": 6.3
+        },
+        "Other Governmental": {
+          "los": 2002,
+          "gross": 5447325.37,
+          "net": 2689289.81,
+          "admits": 299,
+          "pct": 5.5,
+          "rev_per_day": 1343.3,
+          "avg_los": 6.7
+        },
+        "Self Pay": {
+          "los": 741,
+          "gross": 1853559.69,
+          "net": 634140,
+          "admits": 110,
+          "pct": 2.0,
+          "rev_per_day": 855.79,
+          "avg_los": 6.7
+        },
+        "Managed Medicaid": {
+          "los": 16003,
+          "gross": 38282285.26,
+          "net": 11863658.52,
+          "admits": 2440,
+          "pct": 44.0,
+          "rev_per_day": 741.34,
+          "avg_los": 6.6
+        }
+      },
+      "top5_gross": {
+        "CareSource": {
+          "qtr_los": {
+            "1Q25": 1057,
+            "2Q25": 1329,
+            "3Q25": 1078,
+            "4Q25": 1279,
+            "1Q26": 1066
+          },
+          "total_gross": 14176382.67
+        },
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1355,
+            "2Q25": 1344,
+            "3Q25": 1342,
+            "4Q25": 1126,
+            "1Q26": 1099
+          },
+          "total_gross": 14000493.05
+        },
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1167,
+            "2Q25": 1300,
+            "3Q25": 1112,
+            "4Q25": 877,
+            "1Q26": 700
+          },
+          "total_gross": 11269659.22
+        },
+        "Molina": {
+          "qtr_los": {
+            "1Q25": 647,
+            "2Q25": 841,
+            "3Q25": 648,
+            "4Q25": 559,
+            "1Q26": 398
+          },
+          "total_gross": 7269998.8
+        },
+        "Aetna": {
+          "qtr_los": {
+            "1Q25": 604,
+            "2Q25": 709,
+            "3Q25": 583,
+            "4Q25": 431,
+            "1Q26": 400
+          },
+          "total_gross": 6008694.48
+        }
+      },
+      "top5_gross_payors": [
+        "CareSource",
+        "UBH",
+        "BCBS/Anthem",
+        "Molina",
+        "Aetna"
+      ],
+      "top5_net": {
+        "UBH": {
+          "qtr_los": {
+            "1Q25": 1355,
+            "2Q25": 1344,
+            "3Q25": 1342,
+            "4Q25": 1126,
+            "1Q26": 1099
+          },
+          "total_net": 6043129.56
+        },
+        "BCBS/Anthem": {
+          "qtr_los": {
+            "1Q25": 1167,
+            "2Q25": 1300,
+            "3Q25": 1112,
+            "4Q25": 877,
+            "1Q26": 700
+          },
+          "total_net": 4773343.23
+        },
+        "CareSource": {
+          "qtr_los": {
+            "1Q25": 1057,
+            "2Q25": 1329,
+            "3Q25": 1078,
+            "4Q25": 1279,
+            "1Q26": 1066
+          },
+          "total_net": 4596931.68
+        },
+        "Medicare": {
+          "qtr_los": {
+            "1Q25": 278,
+            "2Q25": 310,
+            "3Q25": 349,
+            "4Q25": 347,
+            "1Q26": 309
+          },
+          "total_net": 4067974.73
+        },
+        "Molina": {
+          "qtr_los": {
+            "1Q25": 647,
+            "2Q25": 841,
+            "3Q25": 648,
+            "4Q25": 559,
+            "1Q26": 398
+          },
+          "total_net": 3381045.11
+        }
+      },
+      "top5_net_payors": [
+        "UBH",
+        "BCBS/Anthem",
+        "CareSource",
+        "Medicare",
+        "Molina"
+      ],
+      "denial_rate": {
+        "Aetna": {
+          "gross": 1145877.18,
+          "net": 381074.6,
+          "denial_adj": 3957.66,
+          "rate": 0.35,
+          "los": 400,
+          "admits": 54
+        },
+        "BCBS/Anthem": {
+          "gross": 1897584.14,
+          "net": 707720.48,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 700,
+          "admits": 95
+        },
+        "Cigna": {
+          "gross": 309421.81,
+          "net": 104770,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 148,
+          "admits": 15
+        },
+        "Other": {
+          "gross": 732385.73,
+          "net": 236839.64,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 243,
+          "admits": 32
+        },
+        "Ohio Healthy": {
+          "gross": 66347.89,
+          "net": 22540,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 28,
+          "admits": 3
+        },
+        "Medicare": {
+          "gross": 887963.8,
+          "net": 849926.82,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 309,
+          "admits": 34
+        },
+        "Medical Mutual": {
+          "gross": 222085.91,
+          "net": 112142.79,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 80,
+          "admits": 11
+        },
+        "UBH": {
+          "gross": 2983704.09,
+          "net": 1372325.41,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 1099,
+          "admits": 142
+        },
+        "CareSource": {
+          "gross": 3020705.37,
+          "net": 953571.19,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 1066,
+          "admits": 136
+        },
+        "Molina": {
+          "gross": 1176422.04,
+          "net": 531864.61,
+          "denial_adj": 792.56,
+          "rate": 0.07,
+          "los": 398,
+          "admits": 48
+        },
+        "AmeriHealth": {
+          "gross": 682264.81,
+          "net": 188865,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 236,
+          "admits": 25
+        },
+        "Buckeye": {
+          "gross": 732388.49,
+          "net": 214501.23,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 240,
+          "admits": 35
+        },
+        "Medicaid": {
+          "gross": 246756.06,
+          "net": 73122.02,
+          "denial_adj": 8850.8,
+          "rate": 3.59,
+          "los": 78,
+          "admits": 10
+        },
+        "VA": {
+          "gross": 315828.44,
+          "net": 289920.86,
+          "denial_adj": 394.92,
+          "rate": 0.13,
+          "los": 113,
+          "admits": 13
+        },
+        "Devoted Health": {
+          "gross": 11461.8,
+          "net": 2718.72,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 12,
+          "admits": 2
+        },
+        "Self Pay": {
+          "gross": 567249.81,
+          "net": 186930,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 180,
+          "admits": 26
+        },
+        "Humana": {
+          "gross": 873900.08,
+          "net": 423949.47,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 302,
+          "admits": 36
+        },
+        "Healthscope": {
+          "gross": 21366.24,
+          "net": 9835,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 7,
+          "admits": 1
+        },
+        "Tricare": {
+          "gross": 123538.68,
+          "net": 49040,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 39,
+          "admits": 4
+        },
+        "PHCS": {
+          "gross": 25856.47,
+          "net": 17582.46,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 16,
+          "admits": 2
+        },
+        "Ambetter": {
+          "gross": 16064.85,
+          "net": 5000,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 5,
+          "admits": 1
+        },
+        "Champ VA": {
+          "gross": 19277.82,
+          "net": 19277.82,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 6,
+          "admits": 1
+        },
+        "Wellcare": {
+          "gross": 22490.79,
+          "net": 3850,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 7,
+          "admits": 1
+        },
+        "Aultcare": {
+          "gross": 32129.7,
+          "net": 14050,
+          "denial_adj": 0,
+          "rate": 0.0,
+          "los": 10,
+          "admits": 1
+        }
+      },
+      "qtr_summary": {
+        "1Q25": {
+          "los": 7496,
+          "gross": 15441635.26,
+          "net": 6190725.98,
+          "admits": 1240
+        },
+        "2Q25": {
+          "los": 8621,
+          "gross": 18502107.79,
+          "net": 8156594.53,
+          "admits": 1346
+        },
+        "3Q25": {
+          "los": 7450,
+          "gross": 15929852.5,
+          "net": 7138873.25,
+          "admits": 1174
+        },
+        "4Q25": {
+          "los": 7105,
+          "gross": 15979800.89,
+          "net": 7399942.27,
+          "admits": 1086
+        },
+        "1Q26": {
+          "los": 5722,
+          "gross": 16133072.0,
+          "net": 6771418.12,
+          "admits": 728
+        }
+      },
+      "program_mix": {
+        "Inpatient": {
+          "los": 28413,
+          "gross": 73220114.96,
+          "net": 32788235.72,
+          "admits": 3916
+        },
+        "PHP": {
+          "los": 2928,
+          "gross": 4308254.48,
+          "net": 1246620.9,
+          "admits": 372
+        },
+        "IOP": {
+          "los": 5053,
+          "gross": 4458099.0,
+          "net": 1622697.53,
+          "admits": 1286
+        }
+      },
+      "totals": {
+        "los": 36394,
+        "gross": 81986468.44,
+        "net": 35657554.15,
+        "admits": 5574
+      }
+    }
+  },
+  "covered_lives": [
+    {
+      "hospital": "Triangle Springs",
+      "payor": "UnitedHealth Group",
+      "total": 371025,
+      "medicare_advantage": 85667,
+      "commercial": 217658,
+      "managed_medicaid": 67700
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Anthem/BCBS",
+      "total": 200008,
+      "medicare_advantage": 11818,
+      "commercial": 145864,
+      "managed_medicaid": 42326
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Children's Wisconsin",
+      "total": 89045,
+      "medicare_advantage": 0,
+      "commercial": 2094,
+      "managed_medicaid": 86951
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Molina Healthcare",
+      "total": 53402,
+      "medicare_advantage": 598,
+      "commercial": 869,
+      "managed_medicaid": 51935
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Humana",
+      "total": 38664,
+      "medicare_advantage": 18836,
+      "commercial": 0,
+      "managed_medicaid": 19828
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Froedtert Health",
+      "total": 34429,
+      "medicare_advantage": 7298,
+      "commercial": 11816,
+      "managed_medicaid": 15315
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Aetna",
+      "total": 22050,
+      "medicare_advantage": 8280,
+      "commercial": 13770,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Centene",
+      "total": 20379,
+      "medicare_advantage": 3170,
+      "commercial": 0,
+      "managed_medicaid": 17209
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Cigna Group",
+      "total": 19589,
+      "medicare_advantage": 10,
+      "commercial": 19579,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Community Care (WI)",
+      "total": 7157,
+      "medicare_advantage": 525,
+      "commercial": 0,
+      "managed_medicaid": 6632
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "CareSource Management Group",
+      "total": 5855,
+      "medicare_advantage": 0,
+      "commercial": 5855,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "TriWest Alliance",
+      "total": 5382,
+      "medicare_advantage": 0,
+      "commercial": 5382,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Quartz Health",
+      "total": 2741,
+      "medicare_advantage": 1870,
+      "commercial": 572,
+      "managed_medicaid": 299
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Government Employees Health Association",
+      "total": 2135,
+      "medicare_advantage": 0,
+      "commercial": 2135,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "WPS Health",
+      "total": 1505,
+      "medicare_advantage": 0,
+      "commercial": 1505,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "NALC Health Benefit",
+      "total": 1445,
+      "medicare_advantage": 0,
+      "commercial": 1445,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "APWU Health",
+      "total": 1174,
+      "medicare_advantage": 0,
+      "commercial": 1174,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Medica (MN)",
+      "total": 884,
+      "medicare_advantage": 21,
+      "commercial": 856,
+      "managed_medicaid": 7
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Mail Handlers Benefit",
+      "total": 472,
+      "medicare_advantage": 0,
+      "commercial": 472,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "HealthPartners (MN)",
+      "total": 462,
+      "medicare_advantage": 0,
+      "commercial": 462,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "American Foreign Service Protective",
+      "total": 224,
+      "medicare_advantage": 0,
+      "commercial": 224,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Rural Carrier Benefit",
+      "total": 82,
+      "medicare_advantage": 0,
+      "commercial": 82,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Point32Health",
+      "total": 77,
+      "medicare_advantage": 0,
+      "commercial": 77,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Ascendiun dba Blue Shield California",
+      "total": 70,
+      "medicare_advantage": 1,
+      "commercial": 69,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Premera Blue Cross",
+      "total": 62,
+      "medicare_advantage": 0,
+      "commercial": 62,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "SAMBA Health Benefit",
+      "total": 37,
+      "medicare_advantage": 0,
+      "commercial": 37,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Medical Mutual",
+      "total": 28,
+      "medicare_advantage": 0,
+      "commercial": 28,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "University of Pittsburgh Medical Center",
+      "total": 19,
+      "medicare_advantage": 1,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Henry Ford Health",
+      "total": 19,
+      "medicare_advantage": 0,
+      "commercial": 19,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Kaiser Permanente",
+      "total": 18,
+      "medicare_advantage": 0,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Sanford Health",
+      "total": 17,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 17
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "EmblemHealth",
+      "total": 15,
+      "medicare_advantage": 0,
+      "commercial": 15,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "MercyCare Insurance",
+      "total": 14,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 14
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Group Health Cooperative",
+      "total": 12,
+      "medicare_advantage": 0,
+      "commercial": 8,
+      "managed_medicaid": 4
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "MHH Healthcare",
+      "total": 11,
+      "medicare_advantage": 11,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Medical Associates Clinic and Health Plans",
+      "total": 10,
+      "medicare_advantage": 10,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Compass Rose Benefits",
+      "total": 9,
+      "medicare_advantage": 0,
+      "commercial": 9,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Carle Foundation",
+      "total": 4,
+      "medicare_advantage": 0,
+      "commercial": 4,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Zing Health",
+      "total": 3,
+      "medicare_advantage": 3,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Baystate Health",
+      "total": 3,
+      "medicare_advantage": 0,
+      "commercial": 3,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Triangle Springs",
+      "payor": "Capital District Physicians' Health Plan",
+      "total": 1,
+      "medicare_advantage": 0,
+      "commercial": 1,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "UnitedHealth Group",
+      "total": 371025,
+      "medicare_advantage": 85667,
+      "commercial": 217658,
+      "managed_medicaid": 67700
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Anthem/BCBS",
+      "total": 200008,
+      "medicare_advantage": 11818,
+      "commercial": 145864,
+      "managed_medicaid": 42326
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Children's Wisconsin",
+      "total": 89045,
+      "medicare_advantage": 0,
+      "commercial": 2094,
+      "managed_medicaid": 86951
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Molina Healthcare",
+      "total": 53402,
+      "medicare_advantage": 598,
+      "commercial": 869,
+      "managed_medicaid": 51935
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Humana",
+      "total": 38664,
+      "medicare_advantage": 18836,
+      "commercial": 0,
+      "managed_medicaid": 19828
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Froedtert Health",
+      "total": 34429,
+      "medicare_advantage": 7298,
+      "commercial": 11816,
+      "managed_medicaid": 15315
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Aetna",
+      "total": 22050,
+      "medicare_advantage": 8280,
+      "commercial": 13770,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Centene",
+      "total": 20379,
+      "medicare_advantage": 3170,
+      "commercial": 0,
+      "managed_medicaid": 17209
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Cigna Group",
+      "total": 19589,
+      "medicare_advantage": 10,
+      "commercial": 19579,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Community Care (WI)",
+      "total": 7157,
+      "medicare_advantage": 525,
+      "commercial": 0,
+      "managed_medicaid": 6632
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "CareSource Management Group",
+      "total": 5855,
+      "medicare_advantage": 0,
+      "commercial": 5855,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "TriWest Alliance",
+      "total": 5382,
+      "medicare_advantage": 0,
+      "commercial": 5382,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Quartz Health",
+      "total": 2741,
+      "medicare_advantage": 1870,
+      "commercial": 572,
+      "managed_medicaid": 299
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Government Employees Health Association",
+      "total": 2135,
+      "medicare_advantage": 0,
+      "commercial": 2135,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "WPS Health",
+      "total": 1505,
+      "medicare_advantage": 0,
+      "commercial": 1505,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "NALC Health Benefit",
+      "total": 1445,
+      "medicare_advantage": 0,
+      "commercial": 1445,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "APWU Health",
+      "total": 1174,
+      "medicare_advantage": 0,
+      "commercial": 1174,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Medica (MN)",
+      "total": 884,
+      "medicare_advantage": 21,
+      "commercial": 856,
+      "managed_medicaid": 7
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Mail Handlers Benefit",
+      "total": 472,
+      "medicare_advantage": 0,
+      "commercial": 472,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "HealthPartners (MN)",
+      "total": 462,
+      "medicare_advantage": 0,
+      "commercial": 462,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "American Foreign Service Protective",
+      "total": 224,
+      "medicare_advantage": 0,
+      "commercial": 224,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Rural Carrier Benefit",
+      "total": 82,
+      "medicare_advantage": 0,
+      "commercial": 82,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Point32Health",
+      "total": 77,
+      "medicare_advantage": 0,
+      "commercial": 77,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Ascendiun dba Blue Shield California",
+      "total": 70,
+      "medicare_advantage": 1,
+      "commercial": 69,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Premera Blue Cross",
+      "total": 62,
+      "medicare_advantage": 0,
+      "commercial": 62,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "SAMBA Health Benefit",
+      "total": 37,
+      "medicare_advantage": 0,
+      "commercial": 37,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Medical Mutual",
+      "total": 28,
+      "medicare_advantage": 0,
+      "commercial": 28,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "University of Pittsburgh Medical Center",
+      "total": 19,
+      "medicare_advantage": 1,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Henry Ford Health",
+      "total": 19,
+      "medicare_advantage": 0,
+      "commercial": 19,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Kaiser Permanente",
+      "total": 18,
+      "medicare_advantage": 0,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Sanford Health",
+      "total": 17,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 17
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "EmblemHealth",
+      "total": 15,
+      "medicare_advantage": 0,
+      "commercial": 15,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "MercyCare Insurance",
+      "total": 14,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 14
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Group Health Cooperative",
+      "total": 12,
+      "medicare_advantage": 0,
+      "commercial": 8,
+      "managed_medicaid": 4
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "MHH Healthcare",
+      "total": 11,
+      "medicare_advantage": 11,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Medical Associates Clinic and Health Plans",
+      "total": 10,
+      "medicare_advantage": 10,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Compass Rose Benefits",
+      "total": 9,
+      "medicare_advantage": 0,
+      "commercial": 9,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Carle Foundation",
+      "total": 4,
+      "medicare_advantage": 0,
+      "commercial": 4,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Zing Health",
+      "total": 3,
+      "medicare_advantage": 3,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Baystate Health",
+      "total": 3,
+      "medicare_advantage": 0,
+      "commercial": 3,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Cottonwood Springs",
+      "payor": "Capital District Physicians' Health Plan",
+      "total": 1,
+      "medicare_advantage": 0,
+      "commercial": 1,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "UnitedHealth Group",
+      "total": 371025,
+      "medicare_advantage": 85667,
+      "commercial": 217658,
+      "managed_medicaid": 67700
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Anthem/BCBS",
+      "total": 200008,
+      "medicare_advantage": 11818,
+      "commercial": 145864,
+      "managed_medicaid": 42326
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Children's Wisconsin",
+      "total": 89045,
+      "medicare_advantage": 0,
+      "commercial": 2094,
+      "managed_medicaid": 86951
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Molina Healthcare",
+      "total": 53402,
+      "medicare_advantage": 598,
+      "commercial": 869,
+      "managed_medicaid": 51935
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Humana",
+      "total": 38664,
+      "medicare_advantage": 18836,
+      "commercial": 0,
+      "managed_medicaid": 19828
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Froedtert Health",
+      "total": 34429,
+      "medicare_advantage": 7298,
+      "commercial": 11816,
+      "managed_medicaid": 15315
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Aetna",
+      "total": 22050,
+      "medicare_advantage": 8280,
+      "commercial": 13770,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Centene",
+      "total": 20379,
+      "medicare_advantage": 3170,
+      "commercial": 0,
+      "managed_medicaid": 17209
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Cigna Group",
+      "total": 19589,
+      "medicare_advantage": 10,
+      "commercial": 19579,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Community Care (WI)",
+      "total": 7157,
+      "medicare_advantage": 525,
+      "commercial": 0,
+      "managed_medicaid": 6632
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "CareSource Management Group",
+      "total": 5855,
+      "medicare_advantage": 0,
+      "commercial": 5855,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "TriWest Alliance",
+      "total": 5382,
+      "medicare_advantage": 0,
+      "commercial": 5382,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Quartz Health",
+      "total": 2741,
+      "medicare_advantage": 1870,
+      "commercial": 572,
+      "managed_medicaid": 299
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Government Employees Health Association",
+      "total": 2135,
+      "medicare_advantage": 0,
+      "commercial": 2135,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "WPS Health",
+      "total": 1505,
+      "medicare_advantage": 0,
+      "commercial": 1505,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "NALC Health Benefit",
+      "total": 1445,
+      "medicare_advantage": 0,
+      "commercial": 1445,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "APWU Health",
+      "total": 1174,
+      "medicare_advantage": 0,
+      "commercial": 1174,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Medica (MN)",
+      "total": 884,
+      "medicare_advantage": 21,
+      "commercial": 856,
+      "managed_medicaid": 7
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Mail Handlers Benefit",
+      "total": 472,
+      "medicare_advantage": 0,
+      "commercial": 472,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "HealthPartners (MN)",
+      "total": 462,
+      "medicare_advantage": 0,
+      "commercial": 462,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "American Foreign Service Protective",
+      "total": 224,
+      "medicare_advantage": 0,
+      "commercial": 224,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Rural Carrier Benefit",
+      "total": 82,
+      "medicare_advantage": 0,
+      "commercial": 82,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Point32Health",
+      "total": 77,
+      "medicare_advantage": 0,
+      "commercial": 77,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Ascendiun dba Blue Shield California",
+      "total": 70,
+      "medicare_advantage": 1,
+      "commercial": 69,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Premera Blue Cross",
+      "total": 62,
+      "medicare_advantage": 0,
+      "commercial": 62,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "SAMBA Health Benefit",
+      "total": 37,
+      "medicare_advantage": 0,
+      "commercial": 37,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Medical Mutual",
+      "total": 28,
+      "medicare_advantage": 0,
+      "commercial": 28,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "University of Pittsburgh Medical Center",
+      "total": 19,
+      "medicare_advantage": 1,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Henry Ford Health",
+      "total": 19,
+      "medicare_advantage": 0,
+      "commercial": 19,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Kaiser Permanente",
+      "total": 18,
+      "medicare_advantage": 0,
+      "commercial": 18,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Sanford Health",
+      "total": 17,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 17
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "EmblemHealth",
+      "total": 15,
+      "medicare_advantage": 0,
+      "commercial": 15,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "MercyCare Insurance",
+      "total": 14,
+      "medicare_advantage": 0,
+      "commercial": 0,
+      "managed_medicaid": 14
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Group Health Cooperative",
+      "total": 12,
+      "medicare_advantage": 0,
+      "commercial": 8,
+      "managed_medicaid": 4
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "MHH Healthcare",
+      "total": 11,
+      "medicare_advantage": 11,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Medical Associates Clinic and Health Plans",
+      "total": 10,
+      "medicare_advantage": 10,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Compass Rose Benefits",
+      "total": 9,
+      "medicare_advantage": 0,
+      "commercial": 9,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Carle Foundation",
+      "total": 4,
+      "medicare_advantage": 0,
+      "commercial": 4,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Zing Health",
+      "total": 3,
+      "medicare_advantage": 3,
+      "commercial": 0,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Baystate Health",
+      "total": 3,
+      "medicare_advantage": 0,
+      "commercial": 3,
+      "managed_medicaid": 0
+    },
+    {
+      "hospital": "Carrollton Springs",
+      "payor": "Capital District Physicians' Health Plan",
+      "total": 1,
+      "medicare_advantage": 0,
+      "commercial": 1,
+      "managed_medicaid": 0
+    }
+  ],
+  "regional_info": [
+    {
+      "id": 1101,
+      "name": "Beckett Springs LLC",
+      "location": "Cincinnati, OH ",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": "Robin Weagley",
+      "ceo": "Robin Weagley",
+      "cfo": "Denise Woods"
+    },
+    {
+      "id": 1103,
+      "name": "Columbus Springs LLC",
+      "location": "Columbus, OH",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": "Robin Weagley",
+      "ceo": "Derrick Jordan",
+      "cfo": null
+    },
+    {
+      "id": 1100,
+      "name": "Dublin Springs LLC",
+      "location": "Dublin, OH",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": "Robin Weagley",
+      "ceo": "AJ (Anthony) Guild",
+      "cfo": null
+    },
+    {
+      "id": 2000,
+      "name": "Highland Springs LLC",
+      "location": "Cleveland, OH",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Robin Weagley",
+      "market_ceo": "Robin Weagley",
+      "ceo": "Brenda Bailey",
+      "cfo": "Joshua Edmondson"
+    },
+    {
+      "id": 4000,
+      "name": "Denver Springs\u00a0 LLC",
+      "location": "Englewood, CO",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Amir Khan",
+      "ceo": "Kim Kline (COO)",
+      "cfo": "Shawn Lemon"
+    },
+    {
+      "id": 5000,
+      "name": "Oakwood Springs LLC",
+      "location": "Oklahoma City, OK",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Amir Khan",
+      "ceo": "Amir Khan",
+      "cfo": "Joe Harrington"
+    },
+    {
+      "id": 4100,
+      "name": "Rainier Springs LLC",
+      "location": "Vancouver, WA",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": null,
+      "ceo": "Philip Herink",
+      "cfo": "Laura Martin"
+    },
+    {
+      "id": 1500,
+      "name": "Triangle Springs",
+      "location": "Raleigh, NC",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": null,
+      "ceo": "Vera Yigle-kaljob",
+      "cfo": "Britt Watkins"
+    },
+    {
+      "id": 1000,
+      "name": "Brentwood Meadows LLC",
+      "location": "Evansville, IN ",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Amir Khan",
+      "ceo": "John Strachan ",
+      "cfo": "Joshua Edmondson"
+    },
+    {
+      "id": 1001,
+      "name": "Sycamore Springs LLC",
+      "location": "Lafayette, IN",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Robin Weagley",
+      "market_ceo": "Amir Khan",
+      "ceo": "Steve Cavender ",
+      "cfo": "Rebecca Dishon"
+    },
+    {
+      "id": 3001,
+      "name": "Copper East",
+      "location": "Gilbert, AZ ",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Jeff Serrano",
+      "ceo": "Jeff Serrano",
+      "cfo": "Randy Caldwell"
+    },
+    {
+      "id": 3000,
+      "name": "Copper Springs LLC",
+      "location": "Avondale, AZ",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Jeff Serrano",
+      "ceo": "Chris Ruble",
+      "cfo": "Tony Garza"
+    },
+    {
+      "id": 1102,
+      "name": "Cottonwood Springs LLC",
+      "location": "Olathe, KS",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": null,
+      "ceo": "Jason Toalson",
+      "cfo": "Kahn Dulohery"
+    },
+    {
+      "id": 2001,
+      "name": "Carrollton Springs LLC",
+      "location": "Carrollton, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Daniel Martinez-Torres",
+      "ceo": "Suni Anthony",
+      "cfo": "Sara Yunus"
+    },
+    {
+      "id": null,
+      "name": "Collin Springs",
+      "location": "Carrollton, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Daniel Martinez-Torres",
+      "ceo": "Carmen Kramer",
+      "cfo": "Chris Dover"
+    },
+    {
+      "id": 2002,
+      "name": "Mesa Springs LLC ",
+      "location": "Ft. Worth, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Daniel Martinez-Torres",
+      "ceo": "Drew Carlton",
+      "cfo": "Adam Mittleider"
+    },
+    {
+      "id": 2004,
+      "name": "Rock Springs LLC",
+      "location": "Georgetown, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Ross Teemant",
+      "ceo": "Selma Ward",
+      "cfo": "Charlie Thompson"
+    },
+    {
+      "id": 2003,
+      "name": "Westpark Springs LLC",
+      "location": "Richmond, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Ross Teemant",
+      "ceo": "Bruce Porter",
+      "cfo": "Kent Ashley"
+    },
+    {
+      "id": 2005,
+      "name": "Woodland Springs",
+      "location": "Woodlands, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Ross Teemant",
+      "ceo": "Alison Dulfer",
+      "cfo": "Amy Jordan"
+    },
+    {
+      "id": null,
+      "name": "Wellbridge Fort Worth",
+      "location": "Ft. Worth, TX",
+      "region": "Central",
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": "Ross Teemant",
+      "market_ceo": "Daniel Martinez-Torres",
+      "ceo": "Kimberly Hancock",
+      "cfo": "Adam Mittleider"
+    },
+    {
+      "id": null,
+      "name": "Wellbridge Greater Dallas",
+      "location": "Plano, TX",
+      "region": null,
+      "vp_finance": "Leslie Frazier",
+      "vp_operations": null,
+      "market_ceo": null,
+      "ceo": "Daniel Martinez-Torres",
+      "cfo": "Veronica Gonzales"
+    },
+    {
+      "id": 2005,
+      "name": "El Dorado",
+      "location": "Tucson, AZ",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": "Jeff Serrano",
+      "ceo": "Jenn Stokes",
+      "cfo": "Brandi Simon"
+    },
+    {
+      "id": 2005,
+      "name": "Valley Springs",
+      "location": "Holyoke, MA",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": null,
+      "ceo": null,
+      "cfo": "Matt Siemenski"
+    },
+    {
+      "id": null,
+      "name": "Tampa General BH",
+      "location": "Tampa, FL",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": null,
+      "ceo": "Doug Leonardo",
+      "cfo": "Vince van Vuuren"
+    },
+    {
+      "id": null,
+      "name": "Mercy Health Behavioral Hospital",
+      "location": "Youngstown, OH",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": "Robin Weagley",
+      "ceo": "Joseph Caruso",
+      "cfo": "Beth Todd"
+    },
+    {
+      "id": null,
+      "name": "Centra Behavioral Health Hospital",
+      "location": "Lynchburg, VA",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": null,
+      "ceo": "Taylor Davis",
+      "cfo": "Luke Camblard"
+    },
+    {
+      "id": null,
+      "name": "Palomar Health Behavioral Health Institute",
+      "location": "Escondido, CA",
+      "region": "West",
+      "vp_finance": "Holly Gonzales",
+      "vp_operations": "Beckie Schauniger",
+      "market_ceo": null,
+      "ceo": null,
+      "cfo": null
+    },
+    {
+      "id": null,
+      "name": "VHC",
+      "location": "Charlottesville, VA",
+      "region": "East",
+      "vp_finance": "Maria Solema",
+      "vp_operations": "Derrick Ellis",
+      "market_ceo": null,
+      "ceo": null,
+      "cfo": null
+    }
+  ],
+  "quarters": [
+    "1Q25",
+    "2Q25",
+    "3Q25",
+    "4Q25",
+    "1Q26"
+  ],
+  "facilities": [
+    "Carrollton Springs",
+    "Collin Springs",
+    "Columbus Springs Dublin",
+    "Columbus Springs East"
+  ]
+}
