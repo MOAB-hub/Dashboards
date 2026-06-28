@@ -16,4 +16,4 @@ https://moab-hub.github.io/Dashboards/hospital_dashboard.html
 
 ## Usage
 
-Open the link above or `hospital_dashboard.html` locally, then upload the latest `Hospital POC Base Data.xlsx` using the file picker to populate all charts and metrics.
+Open the link above, then upload the latest `Hospital POC Base Data.xlsx` using the file picker to populate all charts and metrics.
