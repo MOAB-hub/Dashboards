@@ -329,7 +329,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="section-card">
         <h4><i class="bi bi-table" style="color:#306cb4"></i> Detail table — patient days by quarter</h4>
         <table class="data-table" id="h1-net-table">
-          <thead><tr><th>Payor</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th><th>2Q26</th><th>Total Exp Reimb</th><th>Exp Reim PPD</th><th>Insurance Pymt PPD</th></tr></thead>
+          <thead id="h1-net-thead"></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -478,7 +478,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="section-card">
         <h4><i class="bi bi-table" style="color:#58b647"></i> Detail table — patient days by quarter</h4>
         <table class="data-table" id="h2-net-table">
-          <thead><tr><th>Payor</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th><th>2Q26</th><th>Total Exp Reimb</th><th>Exp Reim PPD</th><th>Insurance Pymt PPD</th></tr></thead>
+          <thead id="h2-net-thead"></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -627,7 +627,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="section-card">
         <h4><i class="bi bi-table" style="color:#1c988c"></i> Detail table — patient days by quarter</h4>
         <table class="data-table" id="h3-net-table">
-          <thead><tr><th>Payor</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th><th>2Q26</th><th>Total Exp Reimb</th><th>Exp Reim PPD</th><th>Insurance Pymt PPD</th></tr></thead>
+          <thead id="h3-net-thead"></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -776,7 +776,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="section-card">
         <h4><i class="bi bi-table" style="color:#764a9d"></i> Detail table — patient days by quarter</h4>
         <table class="data-table" id="h4-net-table">
-          <thead><tr><th>Payor</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th><th>1Q26</th><th>2Q26</th><th>Total Exp Reimb</th><th>Exp Reim PPD</th><th>Insurance Pymt PPD</th></tr></thead>
+          <thead id="h4-net-thead"></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -918,7 +918,6 @@ function saveGrouped() { safeStorage(() => localStorage.setItem(GROUPED_KEY, JSO
 function saveCoveredLives() { safeStorage(() => localStorage.setItem(COVERED_LIVES_KEY, JSON.stringify(COVERED_LIVES)), null); }
 function saveRegionalInfo() { safeStorage(() => localStorage.setItem(REGIONAL_INFO_KEY, JSON.stringify(REGIONAL_INFO)), null); }
 
-const QUARTERS = ["1Q25","2Q25","3Q25","4Q25","1Q26","2Q26"];
 const PROGRAM_TYPES = ["Inpatient","PHP","IOP","OP"];
 // Financial-class colors drawn from the official Lifepoint primary + secondary palette
 const FC_COLORS = {
@@ -979,12 +978,15 @@ function aggregateRecords(recs) {
   const payorGroups = groupBy(recs, 'p');
   const payorTotals = Object.entries(payorGroups).map(([p,arr])=>({p, net:agg(arr,'n')}));
   const top5n = [...payorTotals].sort((a,b)=>b.net-a.net).slice(0,5).map(x=>x.p);
+  // Rolling display window is always computed fresh (never a fixed year), so
+  // it automatically covers whatever quarter is newest in the loaded data.
+  const quarterWindow = getQuarterWindow();
   const mkTop5 = (payors, totalField, srcField) => {
     const res = {};
     payors.forEach(p => {
       const arr = payorGroups[p] || [];
       const qtr_los = {};
-      QUARTERS.forEach(q => { qtr_los[q] = agg(arr.filter(r=>r.q===q), 'los'); });
+      quarterWindow.forEach(q => { qtr_los[q] = agg(arr.filter(r=>r.q===q), 'los'); });
       const pLos = agg(arr,'los'), pIns = agg(arr,'ip');
       res[p] = {qtr_los, [totalField]: round2(agg(arr, srcField)),
         total_los: pLos, rev_ppd: pLos ? round2(agg(arr, srcField)/pLos) : 0,
@@ -993,10 +995,12 @@ function aggregateRecords(recs) {
     return res;
   };
 
+  // qtr_summary covers every quarter actually present in recs (not just the
+  // rolling window) so year-over-year comparisons (e.g. Exec Insights) can
+  // always look up "latest quarter" vs. "same quarter, prior year".
   const qtrGroups = groupBy(recs, 'q');
   const qtr_summary = {};
-  QUARTERS.forEach(q => {
-    const arr = qtrGroups[q] || [];
+  Object.entries(qtrGroups).forEach(([q, arr]) => {
     qtr_summary[q] = {los: agg(arr,'los'), gross: round2(agg(arr,'g')), net: round2(agg(arr,'n')), admits: agg(arr,'a')};
   });
 
@@ -1014,13 +1018,26 @@ function aggregateRecords(recs) {
   };
 }
 
-// ----- Rolling-quarter helpers (for the Quarterly Trend chart) -----
+// ===================================================
+// YEAR-AGNOSTIC QUARTER HELPERS
+// Nothing below hardcodes a specific year — every "current year" / "latest
+// quarter" / "6-quarter window" is derived from whatever quarters are
+// actually present in RAW_DATA, so this keeps working correctly as new
+// years' data is loaded, with no code changes required.
+// ===================================================
+
 // Given a quarter like "1Q26", returns the prior quarter "4Q25".
 function prevQuarter(q) {
   const n = parseInt(q[0], 10);
   const yy = parseInt(q.slice(2), 10);
   if (n === 1) return `4Q${String(yy - 1).padStart(2,'0')}`;
   return `${n - 1}Q${String(yy).padStart(2,'0')}`;
+}
+// Steps `n` quarters back from q (e.g. n=4 gives the same quarter, prior year).
+function quartersBack(q, n) {
+  let cur = q;
+  for (let i = 0; i < n; i++) cur = prevQuarter(cur);
+  return cur;
 }
 // Returns `count` quarters ending at (and including) endQ, oldest-first.
 function rollingQuarterList(endQ, count) {
@@ -1029,25 +1046,48 @@ function rollingQuarterList(endQ, count) {
   for (let i = 1; i < count; i++) { cur = prevQuarter(cur); list.unshift(cur); }
   return list;
 }
+// Sortable key for chronological ordering across any year (e.g. "1Q26" -> 20261).
+function quarterSortKey(q) { return parseInt(yearOf(q),10)*10 + parseInt(q[0],10); }
+
+// The single newest quarter actually loaded in RAW_DATA, whatever year it is.
+function getLatestQuarterInData() {
+  if (!RAW_DATA.length) return '1Q25';
+  let best = RAW_DATA[0].q;
+  for (const r of RAW_DATA) { if (quarterSortKey(r.q) > quarterSortKey(best)) best = r.q; }
+  return best;
+}
+// The rolling window of quarters currently on display (Top 5 Health Plans
+// chart/table, and the Overview trend chart's "current year" mode) — always
+// the trailing `count` quarters ending at the newest quarter loaded.
+function getQuarterWindow(count) {
+  return rollingQuarterList(getLatestQuarterInData(), count || 6);
+}
+// "Current year" = the year of the newest quarter loaded. "Prior year" is
+// always current-1 — these drive the Year toggle's labels and values, so the
+// toggle automatically relabels itself (e.g. "2026 YTD" -> "2027 YTD") the
+// moment a new year's data is loaded, with no code changes.
+function getCurrentYear() { return yearOf(getLatestQuarterInData()); }
+function getPriorYear() { return String(parseInt(getCurrentYear(), 10) - 1); }
+
 // Determines the trailing 6-quarter window to show in the trend chart for a given Year filter:
-//  - "2026": rolling 6 quarters ending at the latest 2026 quarter present in the data
-//  - "2025": the 4 quarters of 2025 plus the 2 preceding quarters, 3Q24/4Q24 (will show 0s — no 2024 data)
+//  - current year: rolling 6 quarters ending at the latest quarter present in the data
+//  - prior year: the 4 quarters of that year plus the 2 preceding quarters (will show 0s if no older data)
 function trendQuarterWindow(year) {
-  if (year === '2025') return rollingQuarterList('4Q25', 6);
-  const yrQuarters = [...new Set(RAW_DATA.filter(r => yearOf(r.q) === '2026').map(r => r.q))];
-  const latest = yrQuarters.length
-    ? yrQuarters.sort((a,b) => parseInt(b[0],10) - parseInt(a[0],10))[0]
-    : '1Q26';
-  return rollingQuarterList(latest, 6);
+  const priorYear = getPriorYear();
+  if (year === priorYear) return rollingQuarterList('4Q' + priorYear.slice(-2), 6);
+  const yrQuarters = RAW_DATA.map(r => r.q).filter(q => yearOf(q) === year);
+  if (!yrQuarters.length) return getQuarterWindow(6);
+  const latestInYear = yrQuarters.reduce((best,q) => quarterSortKey(q) > quarterSortKey(best) ? q : best);
+  return rollingQuarterList(latestInYear, 6);
 }
 
 // ===================================================
-// PER-SECTION FILTER STATE (defaults: Inpatient / 2026 YTD)
+// PER-SECTION FILTER STATE (defaults: Inpatient / current-year YTD)
 // ===================================================
 const sectionFilters = {};
 function getFilter(hid, section) {
   const key = hid + '|' + section;
-  if (!sectionFilters[key]) sectionFilters[key] = {programType: 'Inpatient', year: '2026'};
+  if (!sectionFilters[key]) sectionFilters[key] = {programType: 'Inpatient', year: getCurrentYear()};
   return sectionFilters[key];
 }
 
@@ -1093,8 +1133,10 @@ function programTypeSelectorHTML(hid, section, color) {
 
 function yearToggleHTML(hid, section, color) {
   const f = getFilter(hid, section);
+  const curYear = getCurrentYear();
+  const priorYear = getPriorYear();
   const mk = (val, label, side) => `<button onclick="onYearChange('${hid}','${section}','${val}')" style="padding:7px 18px;font-size:.8rem;font-weight:700;border:1.5px solid ${color};cursor:pointer;background:${f.year===val?color:'#fff'};color:${f.year===val?'#fff':color};${side==='l'?'border-radius:8px 0 0 8px;border-right:none':'border-radius:0 8px 8px 0'}">${label}</button>`;
-  return `<div style="display:inline-flex">${mk('2026','2026 YTD','l')}${mk('2025','2025 Full Year','r')}</div>`;
+  return `<div style="display:inline-flex">${mk(curYear, curYear+' YTD','l')}${mk(priorYear, priorYear+' Full Year','r')}</div>`;
 }
 
 function injectFilterBar(container, hid, section, color, includeYear, extraHTML) {
@@ -1514,20 +1556,23 @@ function buildRollingNetSection(hid) {
   document.getElementById(hid+'-net-chart-title').textContent =
     `Rolling 6 quarters - ${ptLabel}, Top 5 Payors by Expected Reimbursement`;
 
-  buildRollingNetChart(hid, hosp);
-  buildRollingNetTable(hid, hosp);
+  // Same window used by aggregateRecords()'s mkTop5, so chart/table columns
+  // always line up with the qtr_los keys actually present on each payor.
+  const quarterWindow = getQuarterWindow();
+  buildRollingNetChart(hid, hosp, quarterWindow);
+  buildRollingNetTable(hid, hosp, quarterWindow);
 }
 
-function buildRollingNetChart(hid, hosp) {
+function buildRollingNetChart(hid, hosp, quarterWindow) {
   const t5 = hosp.top5_net;
   const payors = hosp.top5_net_payors;
   const datasets = payors.map((p,i)=>{
     const c = CHART_PALETTE[i%CHART_PALETTE.length];
-    return {label:p,data:QUARTERS.map(q=>t5[p].qtr_los[q]||0),borderColor:c,backgroundColor:c+'44',tension:.3,fill:false,pointRadius:5};
+    return {label:p,data:quarterWindow.map(q=>t5[p].qtr_los[q]||0),borderColor:c,backgroundColor:c+'44',tension:.3,fill:false,pointRadius:5};
   });
   makeChart(hid+'-net-chart', {
     type:'line',
-    data:{labels:QUARTERS,datasets},
+    data:{labels:quarterWindow,datasets},
     options:{
       responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top'}},
@@ -1536,13 +1581,15 @@ function buildRollingNetChart(hid, hosp) {
   });
 }
 
-function buildRollingNetTable(hid, hosp) {
+function buildRollingNetTable(hid, hosp, quarterWindow) {
   const t5 = hosp.top5_net;
   const payors = hosp.top5_net_payors;
+  const thead = document.getElementById(hid+'-net-thead');
+  thead.innerHTML = `<tr><th>Payor</th>${quarterWindow.map(q=>`<th>${q}</th>`).join('')}<th>Total Exp Reimb</th><th>Exp Reim PPD</th><th>Insurance Pymt PPD</th></tr>`;
   const tbody = document.querySelector(`#${hid}-net-table tbody`);
   tbody.innerHTML = payors.map((p,i)=>{
     const c = CHART_PALETTE[i%CHART_PALETTE.length];
-    const qtds = QUARTERS.map(q=>`<td>${fmtN(t5[p].qtr_los[q]||0)}</td>`).join('');
+    const qtds = quarterWindow.map(q=>`<td>${fmtN(t5[p].qtr_los[q]||0)}</td>`).join('');
     return `<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c};margin-right:6px"></span>${p}</td>${qtds}<td><strong>${fmtDollar(t5[p].total_net)}</strong></td><td>${fmtDollar(t5[p].rev_ppd)}</td><td>${fmtDollar(t5[p].ins_yield_ppd)}</td></tr>`;
   }).join('');
 }
@@ -1687,10 +1734,13 @@ function buildInsights(hid, hosp, h) {
   const medRPD = pm['Medicare']?.rev_per_day||0;
   const commRPD = pm['Commercial']?.rev_per_day||0;
 
-  const q1_25 = hosp.qtr_summary['1Q25'];
-  const q1_26 = hosp.qtr_summary['1Q26'];
-  const losTrend = (q1_26 && q1_25 && q1_25.los) ? ((q1_26.los - q1_25.los)/q1_25.los*100) : 0;
-  const netTrend = (q1_26 && q1_25 && q1_25.net) ? ((q1_26.net - q1_25.net)/q1_25.net*100) : 0;
+  // Year-over-year: latest quarter loaded vs. the same quarter one year earlier.
+  const latestQ = getLatestQuarterInData();
+  const priorYearQ = quartersBack(latestQ, 4);
+  const qLatest = hosp.qtr_summary[latestQ];
+  const qPriorYear = hosp.qtr_summary[priorYearQ];
+  const losTrend = (qLatest && qPriorYear && qPriorYear.los) ? ((qLatest.los - qPriorYear.los)/qPriorYear.los*100) : 0;
+  const netTrend = (qLatest && qPriorYear && qPriorYear.net) ? ((qLatest.net - qPriorYear.net)/qPriorYear.net*100) : 0;
 
   const insights = [
     {
@@ -1711,7 +1761,7 @@ function buildInsights(hid, hosp, h) {
     {
       icon:'bi-arrow-up-circle', bg:'#e2f3f1', color:'#1c988c',
       title:'Volume &amp; expected reimbursement trend',
-      text:`Comparing 1Q25 vs. 1Q26: patient days changed by <strong>${losTrend.toFixed(1)}%</strong> and expected reimbursement changed by <strong>${netTrend.toFixed(1)}%</strong>. Note: 1Q26 reflects partial quarter data. Monitor census trends weekly to project full-year performance and adjust staffing ratios accordingly.`
+      text:`Comparing ${priorYearQ} vs. ${latestQ}: patient days changed by <strong>${losTrend.toFixed(1)}%</strong> and expected reimbursement changed by <strong>${netTrend.toFixed(1)}%</strong>. Note: the most recent quarter may reflect partial period data. Monitor census trends weekly to project full-year performance and adjust staffing ratios accordingly.`
     },
     {
       icon:'bi-star-fill', bg:'#ece5f3', color:'#764a9d',
