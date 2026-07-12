@@ -299,6 +299,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
+        <h4><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="chart-wrap"><canvas id="h1-fc-combo"></canvas></div>
+      </div>
+      <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#306cb4"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
         <div class="chart-wrap"><canvas id="h1-trend"></canvas></div>
       </div>
@@ -427,6 +431,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Program type mix</h4>
           <div class="chart-wrap"><canvas id="h2-program"></canvas></div>
         </div>
+      </div>
+      <div class="section-card">
+        <h4><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="chart-wrap"><canvas id="h2-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#58b647"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -559,6 +567,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
+        <h4><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="chart-wrap"><canvas id="h3-fc-combo"></canvas></div>
+      </div>
+      <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#1c988c"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
         <div class="chart-wrap"><canvas id="h3-trend"></canvas></div>
       </div>
@@ -687,6 +699,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Program type mix</h4>
           <div class="chart-wrap"><canvas id="h4-program"></canvas></div>
         </div>
+      </div>
+      <div class="section-card">
+        <h4><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="chart-wrap"><canvas id="h4-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#764a9d"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -1298,6 +1314,7 @@ function buildOverview(hid) {
   // Program Type Mix chart always reflects the full program breakdown for the selected year
   const yearHosp = aggregateRecords(filterRecords(hid, {year: filter.year}));
   buildProgram(hid, yearHosp, h.color);
+  buildFcComboChart(hid, hosp, filter);
   buildTrend(hid, filter, h.color);
 }
 
@@ -1354,6 +1371,36 @@ function buildProgram(hid, hosp, color) {
       labels,
       datasets:[
         {label:'Patient Days',data:vals,backgroundColor:color+'cc',yAxisID:'y'},
+        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1'},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:dualAxisLabel}}},
+      scales:{
+        y:{position:'left',title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
+        y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
+      }
+    }
+  });
+}
+
+// ===== PAYOR MIX + PATIENT DAYS + EXPECTED REIMBURSEMENT, BY PROGRAM TYPE =====
+function buildFcComboChart(hid, hosp, filter) {
+  const ptLabel = filter.programType === 'All' ? 'All Program Types' : filter.programType;
+  document.getElementById(hid+'-fc-combo-title').textContent =
+    `Payor mix, patient days & expected reimbursement — ${ptLabel}`;
+  const pm = hosp.payor_mix;
+  const labels = Object.keys(pm).sort((a,b)=>pm[b].pct-pm[a].pct);
+  const vals = labels.map(l=>pm[l].los);
+  const netVals = labels.map(l=>pm[l].net);
+  const colors = labels.map(l=>FC_COLORS[l]||'#999');
+  makeChart(hid+'-fc-combo', {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'Patient Days',data:vals,backgroundColor:colors,yAxisID:'y'},
         {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1'},
       ]
     },
