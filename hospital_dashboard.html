@@ -322,7 +322,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 
     <!-- ROLLING NET TAB -->
     <div class="tab-section" id="h1-rolling-net">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:14px" id="h1-net-fc"></div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up-arrow" style="color:#306cb4"></i> <span id="h1-net-chart-title">Rolling 6 quarters - Inpatient Days, Top 5 Payors by Expected Reimbursement</span></h4>
         <div class="chart-wrap" style="height:320px"><canvas id="h1-net-chart"></canvas></div>
@@ -472,7 +471,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 
     <!-- ROLLING NET TAB -->
     <div class="tab-section" id="h2-rolling-net">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:14px" id="h2-net-fc"></div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up-arrow" style="color:#58b647"></i> <span id="h2-net-chart-title">Rolling 6 quarters - Inpatient Days, Top 5 Payors by Expected Reimbursement</span></h4>
         <div class="chart-wrap" style="height:320px"><canvas id="h2-net-chart"></canvas></div>
@@ -622,7 +620,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 
     <!-- ROLLING NET TAB -->
     <div class="tab-section" id="h3-rolling-net">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:14px" id="h3-net-fc"></div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up-arrow" style="color:#1c988c"></i> <span id="h3-net-chart-title">Rolling 6 quarters - Inpatient Days, Top 5 Payors by Expected Reimbursement</span></h4>
         <div class="chart-wrap" style="height:320px"><canvas id="h3-net-chart"></canvas></div>
@@ -772,7 +769,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 
     <!-- ROLLING NET TAB -->
     <div class="tab-section" id="h4-rolling-net">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:14px" id="h4-net-fc"></div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up-arrow" style="color:#764a9d"></i> <span id="h4-net-chart-title">Rolling 6 quarters - Inpatient Days, Top 5 Payors by Expected Reimbursement</span></h4>
         <div class="chart-wrap" style="height:320px"><canvas id="h4-net-chart"></canvas></div>
@@ -1071,7 +1067,7 @@ function financialClassSelectorHTML(hid, key, color) {
   ).join('');
   return `<div style="display:flex;align-items:center;gap:8px">
     <label style="font-size:.74rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px">Financial Class</label>
-    <select onchange="onFinClassChange('${hid}','${key}',this.value)" style="border:1.5px solid #d8e0e8;border-radius:8px;padding:6px 14px;font-size:.83rem;color:${color};font-weight:600;background:#fff;cursor:pointer">
+    <select onchange="onFinClassChange('${hid}','${key}',this.value)" style="border:1.5px solid #d8e0e8;border-radius:8px;padding:6px 14px;font-size:.83rem;color:${color};font-weight:600;background:#fff;cursor:pointer;width:190px">
       ${opts}
     </select>
   </div>`;
@@ -1089,7 +1085,7 @@ function programTypeSelectorHTML(hid, section, color) {
   }).join('');
   return `<div style="display:flex;align-items:center;gap:8px">
     <label style="font-size:.74rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px">Program Type</label>
-    <select onchange="onProgramTypeChange('${hid}','${section}',this.value)" style="border:1.5px solid #d8e0e8;border-radius:8px;padding:6px 14px;font-size:.83rem;color:${color};font-weight:600;background:#fff;cursor:pointer">
+    <select onchange="onProgramTypeChange('${hid}','${section}',this.value)" style="border:1.5px solid #d8e0e8;border-radius:8px;padding:6px 14px;font-size:.83rem;color:${color};font-weight:600;background:#fff;cursor:pointer;width:190px">
       ${opts}
     </select>
   </div>`;
@@ -1101,12 +1097,15 @@ function yearToggleHTML(hid, section, color) {
   return `<div style="display:inline-flex">${mk('2026','2026 YTD','l')}${mk('2025','2025 Full Year','r')}</div>`;
 }
 
-function injectFilterBar(container, hid, section, color, includeYear) {
+function injectFilterBar(container, hid, section, color, includeYear, extraHTML) {
   const cls = 'filter-bar-' + section;
   const existing = container.querySelector(':scope > .' + cls);
   const html = `<div class="${cls}" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;background:#fff;border-radius:12px;padding:14px 20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
     ${includeYear ? yearToggleHTML(hid, section, color) : '<div></div>'}
-    ${programTypeSelectorHTML(hid, section, color)}
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      ${programTypeSelectorHTML(hid, section, color)}
+      ${extraHTML || ''}
+    </div>
   </div>`;
   if (existing) existing.outerHTML = html;
   else container.insertAdjacentHTML('afterbegin', html);
@@ -1504,11 +1503,10 @@ function buildRollingNetSection(hid) {
   const h = HOSPITALS_CFG.find(x=>x.id===hid);
   const filter = getFilter(hid, 'rollingNet');
   const container = document.getElementById(hid+'-rolling-net');
-  injectFilterBar(container, hid, 'rollingNet', h.color, false);
-
   // A single Financial Class filter drives both the chart and the detail
-  // table together, so they always stay in sync.
-  document.getElementById(hid+'-net-fc').innerHTML = financialClassSelectorHTML(hid, 'rollingNet', h.color);
+  // table together, so they always stay in sync. It lives in the same
+  // filter bar as the Program Type dropdown.
+  injectFilterBar(container, hid, 'rollingNet', h.color, false, financialClassSelectorHTML(hid, 'rollingNet', h.color));
   const fc = getFinClassFilter(hid, 'rollingNet');
   const hosp = aggregateRecords(filterRecords(hid, {programType: filter.programType, financialClass: fc}));
 
