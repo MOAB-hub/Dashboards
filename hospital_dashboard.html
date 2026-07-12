@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 /* Brand type: Lifepoint's headline face is Dax Pro (licensed, not
@@ -81,6 +82,15 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 .dash-content { padding:28px 32px; max-width:1400px; margin:0 auto; }
 .back-btn { background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.4); color:white; border-radius:8px; padding:8px 16px; font-size:.82rem; cursor:pointer; transition:.2s; }
 .back-btn:hover { background:rgba(255,255,255,.3); }
+
+/* ===== CHART LABELS TOGGLE ===== */
+.toggle-switch { position:relative; display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; }
+.toggle-switch input { position:absolute; opacity:0; width:0; height:0; }
+.toggle-slider { position:relative; display:inline-block; width:38px; height:20px; background:rgba(255,255,255,.3); border-radius:20px; transition:.2s; flex-shrink:0; }
+.toggle-slider::before { content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:.2s; }
+.toggle-switch input:checked + .toggle-slider { background:#58b647; }
+.toggle-switch input:checked + .toggle-slider::before { transform:translateX(18px); }
+.toggle-label-text { font-size:.8rem; color:white; font-weight:600; white-space:nowrap; }
 
 /* ===== KPI CARDS ===== */
 .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:28px; }
@@ -248,6 +258,20 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         <tbody id="user-tbody"></tbody>
       </table>
     </div>
+    <div class="add-user-form" style="margin-top:24px;margin-bottom:0">
+      <h4 style="font-size:1rem;font-weight:700;margin-bottom:16px"><i class="bi bi-cloud-upload"></i> Update dashboard data</h4>
+      <p style="font-size:.85rem;color:#666;margin-bottom:20px">Upload an updated Base Data, Covered Lives, or Hospital Region Info file to refresh the dashboard — the file type is detected automatically and only that section of the data is updated. Once uploaded, that file becomes the permanent master data for its section — it will remain active for every hospital until a newer file is uploaded.</p>
+      <div id="admin-saved-notice" style="display:none;background:#eaf6e7;border:1px solid #a8dc9c;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#3d8a2f">
+        <i class="bi bi-database-check"></i> <strong>Uploaded data is active.</strong> The dashboard is running from previously uploaded file(s). It will remain until a new file is uploaded.
+      </div>
+      <div class="upload-zone" onclick="document.getElementById('admin-file').click()" id="admin-dropzone">
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+        <p><strong>Click to upload</strong> or drag &amp; drop</p>
+        <div class="hint">Accepts: Base Data Sample Redacted Dashboard.xlsx, Covered Lives Sample.xlsx, or Hospital Region Info.xlsx</div>
+      </div>
+      <input type="file" id="admin-file" accept=".xlsx,.xls" style="display:none" onchange="handleUpload(this)">
+      <div id="admin-upload-status" style="margin-top:16px;font-size:.85rem;"></div>
+    </div>
   </div>
 </div>
 
@@ -259,7 +283,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Carrollton Springs</h2>
       <div class="meta">Carrollton, TX | Central Region | Leader: Donald Duck</div>
     </div>
-    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <label class="toggle-switch">
+        <input type="checkbox" id="h1-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label-text">Show chart labels</span>
+      </label>
+      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    </div>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h1','overview',this)">Overview</button>
@@ -268,7 +299,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h1','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h1','regional',this)">Regional</button>
     <button onclick="showTab('h1','insights',this)">Exec Insights</button>
-    <button onclick="showTab('h1','upload',this)">Upload Data</button>
   </div>
   <div class="dash-content">
 
@@ -379,24 +409,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- UPLOAD TAB -->
-    <div class="tab-section" id="h1-upload">
-      <div class="section-card">
-        <h4><i class="bi bi-cloud-upload" style="color:#306cb4"></i> Update dashboard data</h4>
-        <p style="font-size:.85rem;color:#666;margin-bottom:20px">Upload an updated Base Data, Covered Lives, or Hospital Region Info file to refresh the dashboard — the file type is detected automatically and only that section of the data is updated. Once uploaded, that file becomes the permanent master data for its section — it will remain active after any refresh until you upload a newer file.</p>
-        <div id="h1-saved-notice" style="display:none;background:#eaf6e7;border:1px solid #a8dc9c;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#3d8a2f">
-          <i class="bi bi-database-check"></i> <strong>Uploaded data is active.</strong> This dashboard is running from your uploaded file(s). It will remain until you upload a new file.
-        </div>
-        <div class="upload-zone" onclick="document.getElementById('h1-file').click()" id="h1-dropzone">
-          <i class="bi bi-file-earmark-spreadsheet"></i>
-          <p><strong>Click to upload</strong> or drag &amp; drop</p>
-          <div class="hint">Accepts: Base Data Sample Redacted Dashboard.xlsx, Covered Lives Sample.xlsx, or Hospital Region Info.xlsx</div>
-        </div>
-        <input type="file" id="h1-file" accept=".xlsx,.xls" style="display:none" onchange="handleUpload(this)">
-        <div id="h1-upload-status" style="margin-top:16px;font-size:.85rem;"></div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -408,7 +420,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Collin Springs</h2>
       <div class="meta">Carrollton, TX | Central Region | Leader: John Smith</div>
     </div>
-    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <label class="toggle-switch">
+        <input type="checkbox" id="h2-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label-text">Show chart labels</span>
+      </label>
+      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    </div>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h2','overview',this)">Overview</button>
@@ -417,7 +436,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h2','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h2','regional',this)">Regional</button>
     <button onclick="showTab('h2','insights',this)">Exec Insights</button>
-    <button onclick="showTab('h2','upload',this)">Upload Data</button>
   </div>
   <div class="dash-content">
 
@@ -528,24 +546,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- UPLOAD TAB -->
-    <div class="tab-section" id="h2-upload">
-      <div class="section-card">
-        <h4><i class="bi bi-cloud-upload" style="color:#58b647"></i> Update dashboard data</h4>
-        <p style="font-size:.85rem;color:#666;margin-bottom:20px">Upload an updated Base Data, Covered Lives, or Hospital Region Info file to refresh the dashboard — the file type is detected automatically and only that section of the data is updated. Once uploaded, that file becomes the permanent master data for its section — it will remain active after any refresh until you upload a newer file.</p>
-        <div id="h2-saved-notice" style="display:none;background:#eaf6e7;border:1px solid #a8dc9c;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#3d8a2f">
-          <i class="bi bi-database-check"></i> <strong>Uploaded data is active.</strong> This dashboard is running from your uploaded file(s). It will remain until you upload a new file.
-        </div>
-        <div class="upload-zone" onclick="document.getElementById('h2-file').click()" id="h2-dropzone">
-          <i class="bi bi-file-earmark-spreadsheet"></i>
-          <p><strong>Click to upload</strong> or drag &amp; drop</p>
-          <div class="hint">Accepts: Base Data Sample Redacted Dashboard.xlsx, Covered Lives Sample.xlsx, or Hospital Region Info.xlsx</div>
-        </div>
-        <input type="file" id="h2-file" accept=".xlsx,.xls" style="display:none" onchange="handleUpload(this)">
-        <div id="h2-upload-status" style="margin-top:16px;font-size:.85rem;"></div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -557,7 +557,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Columbus Springs Dublin</h2>
       <div class="meta">Dublin, OH | East Region | Leader: Brooke Hogan</div>
     </div>
-    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <label class="toggle-switch">
+        <input type="checkbox" id="h3-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label-text">Show chart labels</span>
+      </label>
+      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    </div>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h3','overview',this)">Overview</button>
@@ -566,7 +573,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h3','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h3','regional',this)">Regional</button>
     <button onclick="showTab('h3','insights',this)">Exec Insights</button>
-    <button onclick="showTab('h3','upload',this)">Upload Data</button>
   </div>
   <div class="dash-content">
 
@@ -677,24 +683,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- UPLOAD TAB -->
-    <div class="tab-section" id="h3-upload">
-      <div class="section-card">
-        <h4><i class="bi bi-cloud-upload" style="color:#1c988c"></i> Update dashboard data</h4>
-        <p style="font-size:.85rem;color:#666;margin-bottom:20px">Upload an updated Base Data, Covered Lives, or Hospital Region Info file to refresh the dashboard — the file type is detected automatically and only that section of the data is updated. Once uploaded, that file becomes the permanent master data for its section — it will remain active after any refresh until you upload a newer file.</p>
-        <div id="h3-saved-notice" style="display:none;background:#eaf6e7;border:1px solid #a8dc9c;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#3d8a2f">
-          <i class="bi bi-database-check"></i> <strong>Uploaded data is active.</strong> This dashboard is running from your uploaded file(s). It will remain until you upload a new file.
-        </div>
-        <div class="upload-zone" onclick="document.getElementById('h3-file').click()" id="h3-dropzone">
-          <i class="bi bi-file-earmark-spreadsheet"></i>
-          <p><strong>Click to upload</strong> or drag &amp; drop</p>
-          <div class="hint">Accepts: Base Data Sample Redacted Dashboard.xlsx, Covered Lives Sample.xlsx, or Hospital Region Info.xlsx</div>
-        </div>
-        <input type="file" id="h3-file" accept=".xlsx,.xls" style="display:none" onchange="handleUpload(this)">
-        <div id="h3-upload-status" style="margin-top:16px;font-size:.85rem;"></div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -706,7 +694,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Columbus Springs East</h2>
       <div class="meta">Columbus, OH | East Region | Leader: Mickey Mouse</div>
     </div>
-    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <label class="toggle-switch">
+        <input type="checkbox" id="h4-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label-text">Show chart labels</span>
+      </label>
+      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
+    </div>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h4','overview',this)">Overview</button>
@@ -715,7 +710,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h4','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h4','regional',this)">Regional</button>
     <button onclick="showTab('h4','insights',this)">Exec Insights</button>
-    <button onclick="showTab('h4','upload',this)">Upload Data</button>
   </div>
   <div class="dash-content">
 
@@ -823,24 +817,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <thead><tr><th>Financial Class (Payor Mix)</th><th>Inpatient Days</th><th>Exp Reim PPD</th><th>Days as % of Total</th><th>Exp Reimb as % of Total</th></tr></thead>
           <tbody></tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- UPLOAD TAB -->
-    <div class="tab-section" id="h4-upload">
-      <div class="section-card">
-        <h4><i class="bi bi-cloud-upload" style="color:#764a9d"></i> Update dashboard data</h4>
-        <p style="font-size:.85rem;color:#666;margin-bottom:20px">Upload an updated Base Data, Covered Lives, or Hospital Region Info file to refresh the dashboard — the file type is detected automatically and only that section of the data is updated. Once uploaded, that file becomes the permanent master data for its section — it will remain active after any refresh until you upload a newer file.</p>
-        <div id="h4-saved-notice" style="display:none;background:#eaf6e7;border:1px solid #a8dc9c;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.83rem;color:#3d8a2f">
-          <i class="bi bi-database-check"></i> <strong>Uploaded data is active.</strong> This dashboard is running from your uploaded file(s). It will remain until you upload a new file.
-        </div>
-        <div class="upload-zone" onclick="document.getElementById('h4-file').click()" id="h4-dropzone">
-          <i class="bi bi-file-earmark-spreadsheet"></i>
-          <p><strong>Click to upload</strong> or drag &amp; drop</p>
-          <div class="hint">Accepts: Base Data Sample Redacted Dashboard.xlsx, Covered Lives Sample.xlsx, or Hospital Region Info.xlsx</div>
-        </div>
-        <input type="file" id="h4-file" accept=".xlsx,.xls" style="display:none" onchange="handleUpload(this)">
-        <div id="h4-upload-status" style="margin-top:16px;font-size:.85rem;"></div>
       </div>
     </div>
 
@@ -1293,6 +1269,48 @@ function showTab(hid, tabName, btn) {
 }
 
 // ===================================================
+// CHART DATA LABELS (persistent, toggleable via the "Show chart labels"
+// switch in the dash header). Reuses each chart's own tooltip formatting so
+// pinned labels read exactly the same as the hover tooltip already does.
+// ===================================================
+if (typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels);
+let SHOW_DATA_LABELS = false;
+
+function dataLabelFormatter(value, ctx) {
+  try {
+    const tooltipCb = ctx.chart.options?.plugins?.tooltip?.callbacks?.label;
+    if (typeof tooltipCb === 'function') {
+      const labels = ctx.chart.data.labels;
+      const fakeItem = {
+        raw: value,
+        label: Array.isArray(labels) ? labels[ctx.dataIndex] : '',
+        formattedValue: String(value),
+        dataset: ctx.dataset,
+        datasetIndex: ctx.datasetIndex,
+        dataIndex: ctx.dataIndex,
+        chart: ctx.chart,
+      };
+      const out = tooltipCb(fakeItem);
+      if (out) return String(out).trim();
+    }
+  } catch(e) {}
+  return (ctx.dataset && ctx.dataset.label) ? `${ctx.dataset.label}: ${value}` : String(value);
+}
+
+function onDataLabelsToggle(checked) {
+  SHOW_DATA_LABELS = checked;
+  // Every hospital has its own toggle switch in its header, but they all
+  // drive one shared, session-global setting — keep them all in sync.
+  document.querySelectorAll('[id$="-datalabels-toggle"]').forEach(el => { el.checked = checked; });
+  Object.values(chartRegistry).forEach(chart => {
+    if (!chart.options.plugins) chart.options.plugins = {};
+    if (!chart.options.plugins.datalabels) chart.options.plugins.datalabels = {};
+    chart.options.plugins.datalabels.display = checked;
+    chart.update();
+  });
+}
+
+// ===================================================
 // CHART REGISTRY (destroy before re-create)
 // ===================================================
 const chartRegistry = {};
@@ -1300,6 +1318,14 @@ function makeChart(id, config) {
   if (chartRegistry[id]) { chartRegistry[id].destroy(); }
   const ctx = document.getElementById(id);
   if (!ctx) return;
+  config.options = config.options || {};
+  config.options.plugins = config.options.plugins || {};
+  config.options.plugins.datalabels = Object.assign({
+    display: SHOW_DATA_LABELS,
+    color: '#1a1a2e',
+    font: {size:10, weight:'700'},
+    formatter: dataLabelFormatter,
+  }, config.options.plugins.datalabels || {});
   chartRegistry[id] = new Chart(ctx, config);
   return chartRegistry[id];
 }
@@ -1310,6 +1336,13 @@ function makeChart(id, config) {
 function fmtDollar(v) { return '$' + Number(v||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
 const fmtN = v => (v||0).toLocaleString('en-US');
 const fmtPct = v => (v||0).toFixed(1) + '%';
+
+// Shared tooltip/datalabel formatter for the dual-axis charts in this dashboard,
+// where the 'y' axis is always a Patient Days count and 'y1' is always a dollar metric.
+function dualAxisLabel(ctx) {
+  const v = ctx.raw;
+  return ctx.dataset.yAxisID === 'y1' ? ` ${ctx.dataset.label}: ${fmtDollar(v)}` : ` ${ctx.dataset.label}: ${fmtN(v)} days`;
+}
 
 // ===================================================
 // OPEN DASHBOARD
@@ -1391,7 +1424,8 @@ function buildDonut(hid, hosp, color) {
       responsive:true, maintainAspectRatio:true,
       plugins:{
         legend:{position:'right',labels:{font:{size:11},boxWidth:12}},
-        tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(total ? ctx.raw/total*100 : 0)})` }}
+        tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(total ? ctx.raw/total*100 : 0)})` }},
+        datalabels:{color:'#fff',font:{size:9,weight:'700'}}
       }
     }
   });
@@ -1414,7 +1448,7 @@ function buildProgram(hid, hosp, color) {
     },
     options:{
       responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+      plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{position:'left',title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
@@ -1443,7 +1477,7 @@ function buildTrend(hid, filter, color) {
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top'}},
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
@@ -1522,11 +1556,16 @@ function buildPayorMixCharts(hid, hosp, color) {
   const sorted = Object.entries(pm).sort((a,b)=>b[1].pct-a[1].pct);
   const labels = sorted.map(([fc])=>fc);
   const colors = labels.map(l=>FC_COLORS[l]||'#999');
+  const totLOS = sorted.reduce((s,[,v])=>s+v.los,0);
 
   makeChart(hid+'-pm-pie', {
     type:'doughnut',
     data:{labels,datasets:[{data:sorted.map(([,v])=>v.los),backgroundColor:colors,borderWidth:2,borderColor:'#fff'}]},
-    options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}}}
+    options:{responsive:true,maintainAspectRatio:true,plugins:{
+      legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}},
+      tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(totLOS ? ctx.raw/totLOS*100 : 0)})` }},
+      datalabels:{color:'#fff',font:{size:9,weight:'700'}}
+    }}
   });
 
   makeChart(hid+'-pm-rpd', {
@@ -1534,7 +1573,7 @@ function buildPayorMixCharts(hid, hosp, color) {
     data:{labels,datasets:[{label:'Exp Reim PPD',data:sorted.map(([,v])=>v.rev_per_day),backgroundColor:colors}]},
     options:{
       responsive:true,maintainAspectRatio:true,indexAxis:'y',
-      plugins:{legend:{display:false}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtDollar(ctx.raw)}` }}},
       scales:{x:{ticks:{callback:v=>fmtDollar(v)}}}
     }
   });
@@ -1575,7 +1614,12 @@ function buildRollingNetChart(hid, hosp, quarterWindow) {
     data:{labels:quarterWindow,datasets},
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top'}},
+      plugins:{
+        legend:{position:'top'},
+        tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} days` }},
+        // 5 payors x 6 quarters gets dense fast — smaller font, offset above the point
+        datalabels:{font:{size:8,weight:'700'},align:'top',offset:2}
+      },
       scales:{y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}}}
     }
   });
@@ -1629,7 +1673,7 @@ function buildCoveredLives(hid, color) {
     },
     options:{
       responsive:true,maintainAspectRatio:true,indexAxis:'y',
-      plugins:{legend:{position:'top'}},
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} lives` }},datalabels:{color:'#fff',font:{size:9,weight:'700'}}},
       scales:{x:{stacked:true,ticks:{callback:v=>fmtN(v)}},y:{stacked:true}}
     }
   });
@@ -1703,7 +1747,7 @@ function buildRegional(hid, h, facTotals, regionFacs) {
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top'}},
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
@@ -1803,7 +1847,7 @@ function buildRatioAnalysis(hid, hosp) {
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top'}},
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Exp Reim PPD'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
@@ -1841,11 +1885,12 @@ function buildRatioAnalysis(hid, hosp) {
 // or Hospital Region Info by header signature.
 // Expected Reimbursement is always taken from the Total Net Charges column.
 // ===================================================
+// Upload is admin-only (lives in the Admin Panel, not any hospital's tabs) —
+// there's a single upload widget for the whole dashboard, not one per hospital.
 function handleUpload(input) {
   const file = input.files[0];
   if (!file) return;
-  const hid = input.id.replace('-file','');
-  const statusEl = document.getElementById(hid+'-upload-status');
+  const statusEl = document.getElementById('admin-upload-status');
   statusEl.innerHTML = '<i class="bi bi-hourglass-split"></i> Reading file...';
 
   const reader = new FileReader();
@@ -1857,11 +1902,11 @@ function handleUpload(input) {
       const headers = (rows[0]||[]).map(v=>String(v==null?'':v).trim());
 
       if (headers.includes('Facility Name') && headers.includes('LOS')) {
-        rebuildBaseData(rows, headers, hid, statusEl);
+        rebuildBaseData(rows, headers, statusEl);
       } else if (headers.includes('Row Labels') && headers.includes('Total Lives')) {
-        rebuildCoveredLives(rows, headers, hid, statusEl);
+        rebuildCoveredLives(rows, headers, statusEl);
       } else if (headers.includes('VP Finance') && headers.includes('Name') && headers.includes('Region')) {
-        rebuildRegionalInfo(rows, headers, hid, statusEl);
+        rebuildRegionalInfo(rows, headers, statusEl);
       } else {
         statusEl.innerHTML = '<span style="color:red"><i class="bi bi-x-circle"></i> Unrecognized file — expected a Base Data, Covered Lives, or Hospital Region Info file.</span>';
       }
@@ -1872,16 +1917,16 @@ function handleUpload(input) {
   reader.readAsArrayBuffer(file);
 }
 
-function finishUpload(hid, statusEl, message) {
+function finishUpload(statusEl, message) {
+  // Every hospital's tabs rebuild lazily (next time each is opened) since the
+  // uploaded data may touch any/all facilities.
   Object.keys(dashBuilt).forEach(k => { dashBuilt[k] = false; });
-  const h = HOSPITALS_CFG.find(x=>x.id===hid);
-  if (h) buildDashboard(hid);
-  statusEl.innerHTML = `<span style="color:green"><i class="bi bi-check2-all"></i> ${message} This is now the master data for this section — it will remain active until you upload a newer file.</span>`;
-  document.querySelectorAll('[id$="-saved-notice"]').forEach(el => el.style.display = 'block');
+  statusEl.innerHTML = `<span style="color:green"><i class="bi bi-check2-all"></i> ${message} This is now the master data for this section — it will remain active until a newer file is uploaded.</span>`;
+  document.getElementById('admin-saved-notice').style.display = 'block';
 }
 
 // Re-aggregates uploaded rows into the same compact grouped-record shape used by GROUPED_RECORDS
-function rebuildBaseData(rows, headers, hid, statusEl) {
+function rebuildBaseData(rows, headers, statusEl) {
   const COL = {};
   headers.forEach((h,i)=>{ COL[h]=i; });
 
@@ -1920,10 +1965,10 @@ function rebuildBaseData(rows, headers, hid, statusEl) {
   }));
   saveGrouped();
 
-  finishUpload(hid, statusEl, `Base data loaded: ${rowCount.toLocaleString()} records processed, Expected Reimbursement taken from Total Net Charges.`);
+  finishUpload(statusEl, `Base data loaded: ${rowCount.toLocaleString()} records processed, Expected Reimbursement taken from Total Net Charges.`);
 }
 
-function rebuildCoveredLives(rows, headers, hid, statusEl) {
+function rebuildCoveredLives(rows, headers, statusEl) {
   const payorIdx = headers.indexOf('Row Labels');
   const totalIdx = headers.indexOf('Total Lives');
   const maIdx = headers.indexOf('Medicare Advantage');
@@ -1946,10 +1991,10 @@ function rebuildCoveredLives(rows, headers, hid, statusEl) {
 
   COVERED_LIVES = records;
   saveCoveredLives();
-  finishUpload(hid, statusEl, `Covered lives data loaded: ${records.length} payor rows.`);
+  finishUpload(statusEl, `Covered lives data loaded: ${records.length} payor rows.`);
 }
 
-function rebuildRegionalInfo(rows, headers, hid, statusEl) {
+function rebuildRegionalInfo(rows, headers, statusEl) {
   const COL = {};
   headers.forEach((h,i)=>{ COL[h]=i; });
   const cfoIdx = COL['CFO/Dir of Finance']!==undefined ? COL['CFO/Dir of Finance'] : COL['CFO'];
@@ -1973,14 +2018,15 @@ function rebuildRegionalInfo(rows, headers, hid, statusEl) {
 
   REGIONAL_INFO = records;
   saveRegionalInfo();
-  finishUpload(hid, statusEl, `Hospital region info loaded: ${records.length} entities.`);
+  finishUpload(statusEl, `Hospital region info loaded: ${records.length} entities.`);
 }
 
 // Show uploaded-data notice on load if any section has saved data
 (function() {
   try {
     if (localStorage.getItem(GROUPED_KEY) || localStorage.getItem(COVERED_LIVES_KEY) || localStorage.getItem(REGIONAL_INFO_KEY)) {
-      document.querySelectorAll('[id$="-saved-notice"]').forEach(el => el.style.display = 'block');
+      const el = document.getElementById('admin-saved-notice');
+      if (el) el.style.display = 'block';
     }
   } catch(e) {}
 })();
@@ -1992,8 +2038,7 @@ document.querySelectorAll('.upload-zone').forEach(zone => {
   zone.addEventListener('drop', e => {
     e.preventDefault();
     zone.style.borderColor='';
-    const hid = zone.id.replace('-dropzone','');
-    const fileInput = document.getElementById(hid+'-file');
+    const fileInput = document.getElementById('admin-file');
     fileInput.files = e.dataTransfer.files;
     handleUpload(fileInput);
   });
