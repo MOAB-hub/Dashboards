@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 /* Brand type: Lifepoint's headline face is Dax Pro (licensed, not
@@ -82,15 +81,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 .dash-content { padding:28px 32px; max-width:1400px; margin:0 auto; }
 .back-btn { background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.4); color:white; border-radius:8px; padding:8px 16px; font-size:.82rem; cursor:pointer; transition:.2s; }
 .back-btn:hover { background:rgba(255,255,255,.3); }
-
-/* ===== CHART LABELS TOGGLE ===== */
-.toggle-switch { position:relative; display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; }
-.toggle-switch input { position:absolute; opacity:0; width:0; height:0; }
-.toggle-slider { position:relative; display:inline-block; width:38px; height:20px; background:rgba(255,255,255,.3); border-radius:20px; transition:.2s; flex-shrink:0; }
-.toggle-slider::before { content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:.2s; }
-.toggle-switch input:checked + .toggle-slider { background:#58b647; }
-.toggle-switch input:checked + .toggle-slider::before { transform:translateX(18px); }
-.toggle-label-text { font-size:.8rem; color:white; font-weight:600; white-space:nowrap; }
 
 /* ===== KPI CARDS ===== */
 .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:28px; }
@@ -283,14 +273,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Carrollton Springs</h2>
       <div class="meta">Carrollton, TX | Central Region | Leader: Donald Duck</div>
     </div>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <label class="toggle-switch">
-        <input type="checkbox" id="h1-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
-        <span class="toggle-slider"></span>
-        <span class="toggle-label-text">Show chart labels</span>
-      </label>
-      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
-    </div>
+    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h1','overview',this)">Overview</button>
@@ -420,14 +403,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Collin Springs</h2>
       <div class="meta">Carrollton, TX | Central Region | Leader: John Smith</div>
     </div>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <label class="toggle-switch">
-        <input type="checkbox" id="h2-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
-        <span class="toggle-slider"></span>
-        <span class="toggle-label-text">Show chart labels</span>
-      </label>
-      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
-    </div>
+    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h2','overview',this)">Overview</button>
@@ -557,14 +533,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Columbus Springs Dublin</h2>
       <div class="meta">Dublin, OH | East Region | Leader: Brooke Hogan</div>
     </div>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <label class="toggle-switch">
-        <input type="checkbox" id="h3-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
-        <span class="toggle-slider"></span>
-        <span class="toggle-label-text">Show chart labels</span>
-      </label>
-      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
-    </div>
+    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h3','overview',this)">Overview</button>
@@ -694,14 +663,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <h2>Columbus Springs East</h2>
       <div class="meta">Columbus, OH | East Region | Leader: Mickey Mouse</div>
     </div>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <label class="toggle-switch">
-        <input type="checkbox" id="h4-datalabels-toggle" onchange="onDataLabelsToggle(this.checked)">
-        <span class="toggle-slider"></span>
-        <span class="toggle-label-text">Show chart labels</span>
-      </label>
-      <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
-    </div>
+    <button class="back-btn" onclick="showLanding()"><i class="bi bi-arrow-left"></i> Portal home</button>
   </div>
   <div class="dash-nav">
     <button class="active" onclick="showTab('h4','overview',this)">Overview</button>
@@ -1269,48 +1231,6 @@ function showTab(hid, tabName, btn) {
 }
 
 // ===================================================
-// CHART DATA LABELS (persistent, toggleable via the "Show chart labels"
-// switch in the dash header). Reuses each chart's own tooltip formatting so
-// pinned labels read exactly the same as the hover tooltip already does.
-// ===================================================
-if (typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels);
-let SHOW_DATA_LABELS = false;
-
-function dataLabelFormatter(value, ctx) {
-  try {
-    const tooltipCb = ctx.chart.options?.plugins?.tooltip?.callbacks?.label;
-    if (typeof tooltipCb === 'function') {
-      const labels = ctx.chart.data.labels;
-      const fakeItem = {
-        raw: value,
-        label: Array.isArray(labels) ? labels[ctx.dataIndex] : '',
-        formattedValue: String(value),
-        dataset: ctx.dataset,
-        datasetIndex: ctx.datasetIndex,
-        dataIndex: ctx.dataIndex,
-        chart: ctx.chart,
-      };
-      const out = tooltipCb(fakeItem);
-      if (out) return String(out).trim();
-    }
-  } catch(e) {}
-  return (ctx.dataset && ctx.dataset.label) ? `${ctx.dataset.label}: ${value}` : String(value);
-}
-
-function onDataLabelsToggle(checked) {
-  SHOW_DATA_LABELS = checked;
-  // Every hospital has its own toggle switch in its header, but they all
-  // drive one shared, session-global setting — keep them all in sync.
-  document.querySelectorAll('[id$="-datalabels-toggle"]').forEach(el => { el.checked = checked; });
-  Object.values(chartRegistry).forEach(chart => {
-    if (!chart.options.plugins) chart.options.plugins = {};
-    if (!chart.options.plugins.datalabels) chart.options.plugins.datalabels = {};
-    chart.options.plugins.datalabels.display = checked;
-    chart.update();
-  });
-}
-
-// ===================================================
 // CHART REGISTRY (destroy before re-create)
 // ===================================================
 const chartRegistry = {};
@@ -1318,14 +1238,6 @@ function makeChart(id, config) {
   if (chartRegistry[id]) { chartRegistry[id].destroy(); }
   const ctx = document.getElementById(id);
   if (!ctx) return;
-  config.options = config.options || {};
-  config.options.plugins = config.options.plugins || {};
-  config.options.plugins.datalabels = Object.assign({
-    display: SHOW_DATA_LABELS,
-    color: '#1a1a2e',
-    font: {size:10, weight:'700'},
-    formatter: dataLabelFormatter,
-  }, config.options.plugins.datalabels || {});
   chartRegistry[id] = new Chart(ctx, config);
   return chartRegistry[id];
 }
@@ -1424,8 +1336,7 @@ function buildDonut(hid, hosp, color) {
       responsive:true, maintainAspectRatio:true,
       plugins:{
         legend:{position:'right',labels:{font:{size:11},boxWidth:12}},
-        tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(total ? ctx.raw/total*100 : 0)})` }},
-        datalabels:{color:'#fff',font:{size:9,weight:'700'}}
+        tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(total ? ctx.raw/total*100 : 0)})` }}
       }
     }
   });
@@ -1563,8 +1474,7 @@ function buildPayorMixCharts(hid, hosp, color) {
     data:{labels,datasets:[{data:sorted.map(([,v])=>v.los),backgroundColor:colors,borderWidth:2,borderColor:'#fff'}]},
     options:{responsive:true,maintainAspectRatio:true,plugins:{
       legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}},
-      tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(totLOS ? ctx.raw/totLOS*100 : 0)})` }},
-      datalabels:{color:'#fff',font:{size:9,weight:'700'}}
+      tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(totLOS ? ctx.raw/totLOS*100 : 0)})` }}
     }}
   });
 
@@ -1616,9 +1526,7 @@ function buildRollingNetChart(hid, hosp, quarterWindow) {
       responsive:true,maintainAspectRatio:false,
       plugins:{
         legend:{position:'top'},
-        tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} days` }},
-        // 5 payors x 6 quarters gets dense fast — smaller font, offset above the point
-        datalabels:{font:{size:8,weight:'700'},align:'top',offset:2}
+        tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} days` }}
       },
       scales:{y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}}}
     }
@@ -1673,7 +1581,7 @@ function buildCoveredLives(hid, color) {
     },
     options:{
       responsive:true,maintainAspectRatio:true,indexAxis:'y',
-      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} lives` }},datalabels:{color:'#fff',font:{size:9,weight:'700'}}},
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmtN(ctx.raw)} lives` }}},
       scales:{x:{stacked:true,ticks:{callback:v=>fmtN(v)}},y:{stacked:true}}
     }
   });
