@@ -92,6 +92,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 /* ===== SECTION CARDS ===== */
 .section-card { background:white; border-radius:14px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,.06); margin-bottom:24px; }
 .section-card h4 { font-size:1rem; font-weight:700; color:#1a1a2e; margin-bottom:4px; padding-bottom:12px; border-bottom:2px solid #f0f4f8; display:flex; align-items:center; gap:8px; }
+.fc-combo-summary { display:flex; gap:28px; flex-wrap:wrap; margin:14px 0 4px; }
+.fc-combo-summary .stat { display:flex; flex-direction:column; }
+.fc-combo-summary .stat .stat-label { font-size:.72rem; color:#888; font-weight:500; text-transform:uppercase; letter-spacing:.5px; }
+.fc-combo-summary .stat .stat-value { font-size:1.25rem; font-weight:700; color:#1a1a2e; }
 .chart-wrap { position:relative; }
 .chart-wrap canvas { max-height:320px; }
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
@@ -300,6 +304,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
       <div class="section-card">
         <h4><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="fc-combo-summary" id="h1-fc-combo-summary"></div>
         <div class="chart-wrap"><canvas id="h1-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
@@ -434,6 +439,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
       <div class="section-card">
         <h4><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="fc-combo-summary" id="h2-fc-combo-summary"></div>
         <div class="chart-wrap"><canvas id="h2-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
@@ -568,6 +574,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
       <div class="section-card">
         <h4><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="fc-combo-summary" id="h3-fc-combo-summary"></div>
         <div class="chart-wrap"><canvas id="h3-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
@@ -702,6 +709,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
       <div class="section-card">
         <h4><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <div class="fc-combo-summary" id="h4-fc-combo-summary"></div>
         <div class="chart-wrap"><canvas id="h4-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
@@ -1390,6 +1398,11 @@ function buildFcComboChart(hid, hosp, filter) {
   const ptLabel = filter.programType === 'All' ? 'All Program Types' : filter.programType;
   document.getElementById(hid+'-fc-combo-title').textContent =
     `Payor mix, patient days & expected reimbursement — ${ptLabel}`;
+  const t = hosp.totals;
+  document.getElementById(hid+'-fc-combo-summary').innerHTML = `
+    <div class="stat"><span class="stat-label">Total Patient Days — ${ptLabel}</span><span class="stat-value">${fmtN(t.los)}</span></div>
+    <div class="stat"><span class="stat-label">Total Expected Reimbursement — ${ptLabel}</span><span class="stat-value">${fmtDollar(t.net)}</span></div>
+  `;
   const pm = hosp.payor_mix;
   const labels = Object.keys(pm).sort((a,b)=>pm[b].pct-pm[a].pct);
   const vals = labels.map(l=>pm[l].los);
