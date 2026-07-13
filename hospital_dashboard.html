@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 /* Brand type: Lifepoint's headline face is Dax Pro (licensed, not
@@ -96,8 +97,15 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 .fc-combo-summary .stat { display:flex; flex-direction:column; }
 .fc-combo-summary .stat .stat-label { font-size:.72rem; color:#888; font-weight:500; text-transform:uppercase; letter-spacing:.5px; }
 .fc-combo-summary .stat .stat-value { font-size:1.25rem; font-weight:700; color:#1a1a2e; }
+.fc-toggle { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:.75rem; font-weight:500; color:#555; user-select:none; }
+.fc-toggle input { display:none; }
+.fc-toggle-slider { width:34px; height:18px; background:#ccc; border-radius:20px; position:relative; transition:.2s; flex-shrink:0; }
+.fc-toggle-slider::before { content:''; position:absolute; width:14px; height:14px; border-radius:50%; background:#fff; top:2px; left:2px; transition:.2s; }
+.fc-toggle input:checked + .fc-toggle-slider { background:var(--lp-blue); }
+.fc-toggle input:checked + .fc-toggle-slider::before { transform:translateX(16px); }
 .chart-wrap { position:relative; }
 .chart-wrap canvas { max-height:320px; }
+.chart-wrap-tall canvas { max-height:380px; }
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media(max-width:900px){ .two-col { grid-template-columns:1fr; } }
 
@@ -298,14 +306,21 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h1-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Program type mix</h4>
+          <h4><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Level of care mix</h4>
           <div class="chart-wrap"><canvas id="h1-program"></canvas></div>
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h1-fc-combo-toggle" onchange="toggleFcComboLabels('h1', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
         <div class="fc-combo-summary" id="h1-fc-combo-summary"></div>
-        <div class="chart-wrap"><canvas id="h1-fc-combo"></canvas></div>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="h1-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#306cb4"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -433,14 +448,21 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h2-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Program type mix</h4>
+          <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Level of care mix</h4>
           <div class="chart-wrap"><canvas id="h2-program"></canvas></div>
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h2-fc-combo-toggle" onchange="toggleFcComboLabels('h2', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
         <div class="fc-combo-summary" id="h2-fc-combo-summary"></div>
-        <div class="chart-wrap"><canvas id="h2-fc-combo"></canvas></div>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="h2-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#58b647"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -568,14 +590,21 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h3-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Program type mix</h4>
+          <h4><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Level of care mix</h4>
           <div class="chart-wrap"><canvas id="h3-program"></canvas></div>
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h3-fc-combo-toggle" onchange="toggleFcComboLabels('h3', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
         <div class="fc-combo-summary" id="h3-fc-combo-summary"></div>
-        <div class="chart-wrap"><canvas id="h3-fc-combo"></canvas></div>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="h3-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#1c988c"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -703,14 +732,21 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h4-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Program type mix</h4>
+          <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Level of care mix</h4>
           <div class="chart-wrap"><canvas id="h4-program"></canvas></div>
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h4-fc-combo-toggle" onchange="toggleFcComboLabels('h4', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
         <div class="fc-combo-summary" id="h4-fc-combo-summary"></div>
-        <div class="chart-wrap"><canvas id="h4-fc-combo"></canvas></div>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="h4-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#764a9d"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -1082,11 +1118,11 @@ function onFinClassChange(hid, key, val) {
 function programTypeSelectorHTML(hid, section, color) {
   const f = getFilter(hid, section);
   const opts = PROGRAM_TYPES.concat(['All']).map(pt => {
-    const label = pt === 'All' ? 'All Program Types' : pt;
+    const label = pt === 'All' ? 'All Levels of Care' : pt;
     return `<option value="${pt}" ${f.programType===pt?'selected':''}>${label}</option>`;
   }).join('');
   return `<div style="display:flex;align-items:center;gap:8px">
-    <label style="font-size:.74rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px">Program Type</label>
+    <label style="font-size:.74rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px">Level of Care</label>
     <select onchange="onProgramTypeChange('${hid}','${section}',this.value)" style="border:1.5px solid #d8e0e8;border-radius:8px;padding:6px 14px;font-size:.83rem;color:${color};font-weight:600;background:#fff;cursor:pointer;width:190px">
       ${opts}
     </select>
@@ -1257,6 +1293,9 @@ function showTab(hid, tabName, btn) {
 // ===================================================
 // CHART REGISTRY (destroy before re-create)
 // ===================================================
+Chart.register(ChartDataLabels);
+Chart.defaults.set('plugins.datalabels', { display: false });
+
 const chartRegistry = {};
 function makeChart(id, config) {
   if (chartRegistry[id]) { chartRegistry[id].destroy(); }
@@ -1395,7 +1434,7 @@ function buildProgram(hid, hosp, color) {
 
 // ===== PAYOR MIX + PATIENT DAYS + EXPECTED REIMBURSEMENT, BY PROGRAM TYPE =====
 function buildFcComboChart(hid, hosp, filter) {
-  const ptLabel = filter.programType === 'All' ? 'All Program Types' : filter.programType;
+  const ptLabel = filter.programType === 'All' ? 'All Levels of Care' : filter.programType;
   document.getElementById(hid+'-fc-combo-title').textContent =
     `Payor mix, patient days & expected reimbursement — ${ptLabel}`;
   const t = hosp.totals;
@@ -1407,25 +1446,47 @@ function buildFcComboChart(hid, hosp, filter) {
   const labels = Object.keys(pm).sort((a,b)=>pm[b].pct-pm[a].pct);
   const vals = labels.map(l=>pm[l].los);
   const netVals = labels.map(l=>pm[l].net);
-  const colors = labels.map(l=>FC_COLORS[l]||'#999');
+  const labelsOn = !!fcComboLabelsOn[hid];
   makeChart(hid+'-fc-combo', {
     type:'bar',
     data:{
       labels,
       datasets:[
-        {label:'Patient Days',data:vals,backgroundColor:colors,yAxisID:'y'},
-        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1'},
+        {label:'Patient Days',data:vals,backgroundColor:'#306cb4cc',yAxisID:'y',
+          datalabels:{
+            display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+            font:{size:10,weight:'600'},
+            formatter:v=>[fmtN(v), `(${fmtPct(t.los ? v/t.los*100 : 0)})`]
+          }},
+        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1',
+          datalabels:{
+            display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+            font:{size:10,weight:'600'},
+            formatter:v=>[fmtDollar(v), `(${fmtPct(t.net ? v/t.net*100 : 0)})`]
+          }},
       ]
     },
     options:{
       responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:dualAxisLabel}}},
+      layout:{padding:{top:labelsOn?26:0}},
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{enabled:!labelsOn,callbacks:{label:dualAxisLabel}},
+      },
       scales:{
         y:{position:'left',title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
       }
     }
   });
+}
+
+const fcComboLabelsOn = {};
+function toggleFcComboLabels(hid, on) {
+  fcComboLabelsOn[hid] = on;
+  const filter = getFilter(hid, 'overview');
+  const hosp = aggregateRecords(filterRecords(hid, {year: filter.year, programType: filter.programType}));
+  buildFcComboChart(hid, hosp, filter);
 }
 
 // ===== QUARTERLY TREND =====
@@ -1561,7 +1622,7 @@ function buildRollingNetSection(hid) {
   const fc = getFinClassFilter(hid, 'rollingNet');
   const hosp = aggregateRecords(filterRecords(hid, {programType: filter.programType, financialClass: fc}));
 
-  const ptLabel = filter.programType === 'All' ? 'All Program Types' : `${filter.programType} Days`;
+  const ptLabel = filter.programType === 'All' ? 'All Levels of Care' : `${filter.programType} Days`;
   document.getElementById(hid+'-net-chart-title').textContent =
     `Rolling 6 quarters - ${ptLabel}, Top 5 Payors by Expected Reimbursement`;
 
