@@ -294,6 +294,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h1','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h1','regional',this)">Regional</button>
     <button onclick="showTab('h1','insights',this)">Exec Insights</button>
+    <button onclick="showTab('h1','assessment',this)">Assessment Tool</button>
   </div>
   <div class="dash-content">
 
@@ -416,6 +417,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
+    <!-- ASSESSMENT TOOL TAB -->
+    <div class="tab-section" id="h1-assessment">
+      <div class="section-card">
+        <h4><i class="bi bi-clipboard-data-fill" style="color:#306cb4"></i> Payor assessment tool</h4>
+        <table class="data-table" id="h1-assessment-table">
+          <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -436,6 +448,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h2','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h2','regional',this)">Regional</button>
     <button onclick="showTab('h2','insights',this)">Exec Insights</button>
+    <button onclick="showTab('h2','assessment',this)">Assessment Tool</button>
   </div>
   <div class="dash-content">
 
@@ -558,6 +571,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
+    <!-- ASSESSMENT TOOL TAB -->
+    <div class="tab-section" id="h2-assessment">
+      <div class="section-card">
+        <h4><i class="bi bi-clipboard-data-fill" style="color:#58b647"></i> Payor assessment tool</h4>
+        <table class="data-table" id="h2-assessment-table">
+          <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -578,6 +602,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h3','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h3','regional',this)">Regional</button>
     <button onclick="showTab('h3','insights',this)">Exec Insights</button>
+    <button onclick="showTab('h3','assessment',this)">Assessment Tool</button>
   </div>
   <div class="dash-content">
 
@@ -700,6 +725,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
+    <!-- ASSESSMENT TOOL TAB -->
+    <div class="tab-section" id="h3-assessment">
+      <div class="section-card">
+        <h4><i class="bi bi-clipboard-data-fill" style="color:#1c988c"></i> Payor assessment tool</h4>
+        <table class="data-table" id="h3-assessment-table">
+          <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -720,6 +756,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h4','covered-lives',this)">Covered Lives</button>
     <button onclick="showTab('h4','regional',this)">Regional</button>
     <button onclick="showTab('h4','insights',this)">Exec Insights</button>
+    <button onclick="showTab('h4','assessment',this)">Assessment Tool</button>
   </div>
   <div class="dash-content">
 
@@ -837,6 +874,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         <div class="chart-wrap" style="height:300px"><canvas id="h4-ratio-chart"></canvas></div>
         <table class="data-table" style="margin-top:20px" id="h4-ratio-table">
           <thead><tr><th>Financial Class (Payor Mix)</th><th>Inpatient Days</th><th>Exp Reim PPD</th><th>Days as % of Total</th><th>Exp Reimb as % of Total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ASSESSMENT TOOL TAB -->
+    <div class="tab-section" id="h4-assessment">
+      <div class="section-card">
+        <h4><i class="bi bi-clipboard-data-fill" style="color:#764a9d"></i> Payor assessment tool</h4>
+        <table class="data-table" id="h4-assessment-table">
+          <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -1165,7 +1213,8 @@ function rebuildSection(hid, section) {
     payorMix: buildPayorMixSection,
     rollingNet: buildRollingNetSection,
     regional: buildRegionalSection,
-    insights: buildInsightsSection
+    insights: buildInsightsSection,
+    assessment: buildAssessmentSection
   };
   if (map[section]) map[section](hid);
 }
@@ -1345,6 +1394,7 @@ function buildDashboard(hid) {
   buildCoveredLives(hid, h.color);
   buildRegionalSection(hid);
   buildInsightsSection(hid);
+  buildAssessmentSection(hid);
 }
 
 // ===== OVERVIEW (Year + Program Type filters) =====
@@ -1857,6 +1907,33 @@ function buildInsights(hid, hosp, h) {
         <div style="font-size:.83rem;color:#444;line-height:1.5">${ins.text}</div>
       </div>
     </li>`).join('');
+}
+
+// ===== ASSESSMENT TOOL (Level of Care filter, per-payor detail — no region roll-up) =====
+function buildAssessmentSection(hid) {
+  const h = HOSPITALS_CFG.find(x=>x.id===hid);
+  const filter = getFilter(hid, 'assessment');
+  const container = document.getElementById(hid+'-assessment');
+  injectFilterBar(container, hid, 'assessment', h.color, false);
+
+  const recs = filterRecords(hid, {programType: filter.programType});
+  const groupBy = (arr, key) => arr.reduce((g,r)=>{ (g[r[key]]=g[r[key]]||[]).push(r); return g; }, {});
+  const payorGroups = groupBy(recs, 'p');
+  const rows = Object.entries(payorGroups).map(([p, arr]) => {
+    const los = arr.reduce((s,r)=>s+(r.los||0), 0);
+    const net = arr.reduce((s,r)=>s+(r.n||0), 0);
+    return { payor: p, fc: arr[0].fc, revPpd: los ? Math.round(net/los*100)/100 : 0 };
+  }).sort((a,b)=>b.revPpd-a.revPpd);
+
+  const tbody = document.querySelector(`#${hid}-assessment-table tbody`);
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td>${r.payor}</td>
+      <td>${r.fc}</td>
+      <td><strong>${fmtDollar(r.revPpd)}</strong></td>
+      <td></td>
+    </tr>
+  `).join('');
 }
 
 function buildRatioAnalysis(hid, hosp) {
