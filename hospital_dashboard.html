@@ -1644,7 +1644,7 @@ function buildOverview(hid) {
   buildDonut(hid, hosp, h.color, filter);
   // Program Type Mix chart always reflects the full program breakdown for the selected year
   const yearHosp = aggregateRecords(filterRecords(hid, {year: filter.year}));
-  buildProgram(hid, yearHosp, h.color);
+  buildProgram(hid, yearHosp);
   buildFcComboChart(hid, hosp, filter);
   buildTrend(hid, filter, h.color);
 }
@@ -1698,7 +1698,11 @@ function buildDonut(hid, hosp, color, filter) {
 }
 
 // ===== PROGRAM MIX =====
-function buildProgram(hid, hosp, color) {
+// Fixed brand colors (Lifepoint Purple / Lifepoint Magenta), not tied to the
+// hospital's own facility color — kept deliberately distinct from the Blue/Teal
+// pair used by the Payor mix, patient days & expected reimbursement chart so the
+// two charts never read as the same series when viewed side by side.
+function buildProgram(hid, hosp) {
   const pm = hosp.program_mix;
   const labels = PROGRAM_TYPES.filter(p => pm[p]).concat(Object.keys(pm).filter(p=>!PROGRAM_TYPES.includes(p)));
   const vals = labels.map(l=>pm[l].los);
@@ -1711,13 +1715,13 @@ function buildProgram(hid, hosp, color) {
     data:{
       labels,
       datasets:[
-        {label:'Patient Days',data:vals,backgroundColor:color+'cc',yAxisID:'y',
+        {label:'Patient Days',data:vals,backgroundColor:'#764a9dcc',yAxisID:'y',
           datalabels:{
             display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
             font:{size:10,weight:'600'},
             formatter:v=>[fmtN(v), `(${fmtPct(totalLos ? v/totalLos*100 : 0)})`]
           }},
-        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1',
+        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#a5228a88',yAxisID:'y1',
           datalabels:{
             display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
             font:{size:10,weight:'600'},
@@ -1742,7 +1746,7 @@ function toggleProgramLabels(hid, on) {
   programLabelsOn[hid] = on;
   const filter = getFilter(hid, 'overview');
   const yearHosp = aggregateRecords(filterRecords(hid, {year: filter.year}));
-  buildProgram(hid, yearHosp, HOSPITALS_CFG.find(x=>x.id===hid).color);
+  buildProgram(hid, yearHosp);
 }
 
 // ===== PAYOR MIX + PATIENT DAYS + EXPECTED REIMBURSEMENT, BY PROGRAM TYPE =====
