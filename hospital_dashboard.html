@@ -1139,17 +1139,16 @@ function getFilter(hid, section) {
 
 // Independent Financial Class filter (separate state per key, e.g. one for
 // the Top 5 Health Plans chart and a separate one for the Assessment Tool).
-const FINANCIAL_CLASSES_FILTERABLE = ["Commercial","Managed Medicaid","Medicare Advantage","Other Governmental"];
-const FINANCIAL_CLASSES_ALL = ["Commercial","Managed Medicaid","Medicaid","Medicare","Medicare Advantage","Other Governmental","Self Pay"];
+const FINANCIAL_CLASSES = ["Commercial","Managed Medicaid","Medicaid","Medicare","Medicare Advantage","Other Governmental","Self Pay"];
 const finClassFilters = {};
 function getFinClassFilter(hid, key) {
   const k = hid + '|' + key;
   if (!finClassFilters[k]) finClassFilters[k] = 'All';
   return finClassFilters[k];
 }
-function financialClassSelectorHTML(hid, key, color, classes) {
+function financialClassSelectorHTML(hid, key, color) {
   const cur = getFinClassFilter(hid, key);
-  const opts = ['All'].concat(classes || FINANCIAL_CLASSES_FILTERABLE).map(fc =>
+  const opts = ['All'].concat(FINANCIAL_CLASSES).map(fc =>
     `<option value="${fc}" ${cur===fc?'selected':''}>${fc==='All'?'All Financial Class':fc}</option>`
   ).join('');
   return `<div style="display:flex;align-items:center;gap:8px">
@@ -1916,7 +1915,7 @@ function buildAssessmentSection(hid) {
   const filter = getFilter(hid, 'assessment');
   const fc = getFinClassFilter(hid, 'assessment');
   const container = document.getElementById(hid+'-assessment');
-  injectFilterBar(container, hid, 'assessment', h.color, false, financialClassSelectorHTML(hid, 'assessment', h.color, FINANCIAL_CLASSES_ALL));
+  injectFilterBar(container, hid, 'assessment', h.color, false, financialClassSelectorHTML(hid, 'assessment', h.color));
 
   const recs = filterRecords(hid, {programType: filter.programType, financialClass: fc});
   const groupBy = (arr, key) => arr.reduce((g,r)=>{ (g[r[key]]=g[r[key]]||[]).push(r); return g; }, {});
