@@ -1359,6 +1359,7 @@ let currentTarget = null;
 let enteredViaRegion = false;
 
 function showLanding() {
+  window.scrollTo(0, 0);
   document.getElementById('landing').style.display = 'flex';
   document.getElementById('admin-panel').classList.remove('active');
   enteredViaRegion = false;
@@ -1464,6 +1465,7 @@ document.getElementById('pwd-modal').addEventListener('click', e => {
 // DASHBOARD TABS
 // ===================================================
 function showTab(hid, tabName, btn) {
+  window.scrollTo(0, 0);
   document.querySelectorAll(`#${hid}-dash .tab-section`).forEach(s => s.classList.remove('active'));
   document.querySelectorAll(`#${hid}-dash .dash-nav button`).forEach(b => b.classList.remove('active'));
   document.getElementById(`${hid}-${tabName}`).classList.add('active');
@@ -1505,6 +1507,7 @@ function dualAxisLabel(ctx) {
 const dashBuilt = {};
 
 function openDashboard(hid) {
+  window.scrollTo(0, 0);
   HOSPITALS_CFG.forEach(h => {
     const el = document.getElementById(h.id+'-dash');
     if (el) el.classList.remove('active');
@@ -1549,6 +1552,7 @@ function buildDashboard(hid) {
 }
 
 function openRegionDashboard(rid) {
+  window.scrollTo(0, 0);
   HOSPITALS_CFG.forEach(h => {
     const el = document.getElementById(h.id+'-dash');
     if (el) el.classList.remove('active');
