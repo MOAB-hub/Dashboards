@@ -1152,7 +1152,9 @@ function filterRecords(hid, opts) {
   return RAW_DATA.filter(r => {
     if (r.f !== h.facility) return false;
     if (opts.programType && opts.programType !== 'All' && r.pt !== opts.programType) return false;
-    if (opts.year && opts.year !== 'All' && yearOf(r.q) !== opts.year) return false;
+    if (opts.year === 'last6') {
+      if (!getQuarterWindow(6).includes(r.q)) return false;
+    } else if (opts.year && opts.year !== 'All' && yearOf(r.q) !== opts.year) return false;
     if (opts.financialClass && opts.financialClass !== 'All' && r.fc !== opts.financialClass) return false;
     return true;
   });
@@ -1249,6 +1251,15 @@ function rollingQuarterList(endQ, count) {
 }
 // Sortable key for chronological ordering across any year (e.g. "1Q26" -> 20261).
 function quarterSortKey(q) { return parseInt(yearOf(q),10)*10 + parseInt(q[0],10); }
+// Calendar end date of a quarter like "1Q26" -> "3/31/2026", for the "Data
+// history" note. Derived purely from the quarter string, no hardcoded year.
+function quarterEndDate(q) {
+  const n = parseInt(q[0], 10);
+  const year = 2000 + parseInt(q.slice(2), 10);
+  const ends = {1:[3,31], 2:[6,30], 3:[9,30], 4:[12,31]};
+  const [month, day] = ends[n];
+  return `${month}/${day}/${year}`;
+}
 
 // The single newest quarter actually loaded in RAW_DATA, whatever year it is.
 function getLatestQuarterInData() {
@@ -1264,16 +1275,17 @@ function getQuarterWindow(count) {
   return rollingQuarterList(getLatestQuarterInData(), count || 6);
 }
 // "Current year" = the year of the newest quarter loaded. "Prior year" is
-// always current-1 — these drive the Year toggle's labels and values, so the
-// toggle automatically relabels itself (e.g. "2026 YTD" -> "2027 YTD") the
-// moment a new year's data is loaded, with no code changes.
+// always current-1 — these drive the "Full Year" toggle button's label and
+// value, so it automatically relabels itself (e.g. "2025 Full Year" ->
+// "2026 Full Year") the moment a new year's data is loaded, with no code changes.
 function getCurrentYear() { return yearOf(getLatestQuarterInData()); }
 function getPriorYear() { return String(parseInt(getCurrentYear(), 10) - 1); }
 
 // Determines the trailing 6-quarter window to show in the trend chart for a given Year filter:
-//  - current year: rolling 6 quarters ending at the latest quarter present in the data
+//  - 'last6' (the default toggle option): rolling 6 quarters ending at the latest quarter present in the data
 //  - prior year: the 4 quarters of that year plus the 2 preceding quarters (will show 0s if no older data)
 function trendQuarterWindow(year) {
+  if (year === 'last6') return getQuarterWindow(6);
   const priorYear = getPriorYear();
   if (year === priorYear) return rollingQuarterList('4Q' + priorYear.slice(-2), 6);
   const yrQuarters = RAW_DATA.map(r => r.q).filter(q => yearOf(q) === year);
@@ -1283,12 +1295,12 @@ function trendQuarterWindow(year) {
 }
 
 // ===================================================
-// PER-SECTION FILTER STATE (defaults: Inpatient / current-year YTD)
+// PER-SECTION FILTER STATE (defaults: Inpatient / last 6 quarters)
 // ===================================================
 const sectionFilters = {};
 function getFilter(hid, section) {
   const key = hid + '|' + section;
-  if (!sectionFilters[key]) sectionFilters[key] = {programType: 'Inpatient', year: getCurrentYear()};
+  if (!sectionFilters[key]) sectionFilters[key] = {programType: 'Inpatient', year: 'last6'};
   return sectionFilters[key];
 }
 
@@ -1337,10 +1349,12 @@ function programTypeSelectorHTML(hid, section, color) {
 
 function yearToggleHTML(hid, section, color) {
   const f = getFilter(hid, section);
-  const curYear = getCurrentYear();
   const priorYear = getPriorYear();
   const mk = (val, label, side) => `<button onclick="onYearChange('${hid}','${section}','${val}')" style="padding:7px 18px;font-size:.8rem;font-weight:700;border:1.5px solid ${color};cursor:pointer;background:${f.year===val?color:'#fff'};color:${f.year===val?'#fff':color};${side==='l'?'border-radius:8px 0 0 8px;border-right:none':'border-radius:0 8px 8px 0'}">${label}</button>`;
-  return `<div style="display:inline-flex">${mk(curYear, curYear+' YTD','l')}${mk(priorYear, priorYear+' Full Year','r')}</div>`;
+  return `<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div style="display:inline-flex">${mk('last6','Last 6 Quarters','l')}${mk(priorYear, priorYear+' Full Year','r')}</div>
+    <span style="font-size:.75rem;color:#888">Data history ${quarterEndDate(getLatestQuarterInData())}</span>
+  </div>`;
 }
 
 function injectFilterBar(container, hid, section, color, includeYear, extraHTML) {
