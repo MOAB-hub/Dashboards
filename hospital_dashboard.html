@@ -378,7 +378,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h1-pm-pie"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-currency-dollar" style="color:#306cb4"></i> Exp Reim PPD by Payor</h4>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-currency-dollar" style="color:#306cb4"></i> Exp Reim PPD by Payor</span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h1-pm-rpd-toggle" onchange="togglePmRpdLabels('h1', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
           <div class="chart-wrap"><canvas id="h1-pm-rpd"></canvas></div>
         </div>
       </div>
@@ -531,7 +538,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h2-pm-pie"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-currency-dollar" style="color:#58b647"></i> Exp Reim PPD by Payor</h4>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-currency-dollar" style="color:#58b647"></i> Exp Reim PPD by Payor</span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h2-pm-rpd-toggle" onchange="togglePmRpdLabels('h2', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
           <div class="chart-wrap"><canvas id="h2-pm-rpd"></canvas></div>
         </div>
       </div>
@@ -684,7 +698,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h3-pm-pie"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-currency-dollar" style="color:#1c988c"></i> Exp Reim PPD by Payor</h4>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-currency-dollar" style="color:#1c988c"></i> Exp Reim PPD by Payor</span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h3-pm-rpd-toggle" onchange="togglePmRpdLabels('h3', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
           <div class="chart-wrap"><canvas id="h3-pm-rpd"></canvas></div>
         </div>
       </div>
@@ -837,7 +858,14 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
           <div class="chart-wrap"><canvas id="h4-pm-pie"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-currency-dollar" style="color:#764a9d"></i> Exp Reim PPD by Payor</h4>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-currency-dollar" style="color:#764a9d"></i> Exp Reim PPD by Payor</span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h4-pm-rpd-toggle" onchange="togglePmRpdLabels('h4', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
           <div class="chart-wrap"><canvas id="h4-pm-rpd"></canvas></div>
         </div>
       </div>
@@ -1884,15 +1912,30 @@ function buildPayorMixCharts(hid, hosp, color) {
     }}
   });
 
+  const labelsOn = !!pmRpdLabelsOn[hid];
   makeChart(hid+'-pm-rpd', {
     type:'bar',
-    data:{labels,datasets:[{label:'Exp Reim PPD',data:sorted.map(([,v])=>v.rev_per_day),backgroundColor:colors}]},
+    data:{labels,datasets:[{label:'Exp Reim PPD',data:sorted.map(([,v])=>v.rev_per_day),backgroundColor:colors,
+      datalabels:{
+        display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+        font:{size:10,weight:'600'}, formatter:v=>fmtDollar(v)
+      }}]},
     options:{
       responsive:true,maintainAspectRatio:true,indexAxis:'y',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtDollar(ctx.raw)}` }}},
+      layout:{padding:{right:labelsOn?40:0}},
+      plugins:{legend:{display:false},tooltip:{enabled:!labelsOn,callbacks:{label:ctx=>` ${ctx.label}: ${fmtDollar(ctx.raw)}` }}},
       scales:{x:{ticks:{callback:v=>fmtDollar(v)}}}
     }
   });
+}
+
+const pmRpdLabelsOn = {};
+function togglePmRpdLabels(hid, on) {
+  pmRpdLabelsOn[hid] = on;
+  const h = HOSPITALS_CFG.find(x=>x.id===hid);
+  const filter = getFilter(hid, 'payorMix');
+  const hosp = aggregateRecords(filterRecords(hid, {programType: filter.programType, year: filter.year}));
+  buildPayorMixCharts(hid, hosp, h.color);
 }
 
 // ===== TOP 5 NET (Program Type filter) =====
