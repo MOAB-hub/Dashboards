@@ -108,6 +108,8 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
 .chart-wrap-tall canvas { max-height:380px; }
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media(max-width:900px){ .two-col { grid-template-columns:1fr; } }
+.two-col-combo-wide { grid-template-columns:1fr 3fr; }
+@media(max-width:900px){ .two-col-combo-wide { grid-template-columns:1fr; } }
 
 /* ===== TABLES ===== */
 .data-table { width:100%; border-collapse:collapse; font-size:.85rem; }
@@ -326,10 +328,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section active" id="h1-overview">
       <div class="kpi-grid" id="h1-kpis"></div>
       <div class="section-card">
-        <h4><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Levels of care mix (all levels of care)</h4>
-        <div class="chart-wrap"><canvas id="h1-program"></canvas></div>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Levels of care mix (all levels of care)</span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h1-program-toggle" onchange="toggleProgramLabels('h1', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
+        <div class="chart-wrap" style="height:214px"><canvas id="h1-program"></canvas></div>
       </div>
-      <div class="two-col">
+      <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#306cb4"></i> <span id="h1-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h1-donut"></canvas></div>
@@ -471,10 +480,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section active" id="h2-overview">
       <div class="kpi-grid" id="h2-kpis"></div>
       <div class="section-card">
-        <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Levels of care mix (all levels of care)</h4>
-        <div class="chart-wrap"><canvas id="h2-program"></canvas></div>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Levels of care mix (all levels of care)</span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h2-program-toggle" onchange="toggleProgramLabels('h2', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
+        <div class="chart-wrap" style="height:214px"><canvas id="h2-program"></canvas></div>
       </div>
-      <div class="two-col">
+      <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#58b647"></i> <span id="h2-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h2-donut"></canvas></div>
@@ -616,10 +632,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section active" id="h3-overview">
       <div class="kpi-grid" id="h3-kpis"></div>
       <div class="section-card">
-        <h4><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Levels of care mix (all levels of care)</h4>
-        <div class="chart-wrap"><canvas id="h3-program"></canvas></div>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Levels of care mix (all levels of care)</span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h3-program-toggle" onchange="toggleProgramLabels('h3', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
+        <div class="chart-wrap" style="height:214px"><canvas id="h3-program"></canvas></div>
       </div>
-      <div class="two-col">
+      <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#1c988c"></i> <span id="h3-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h3-donut"></canvas></div>
@@ -761,10 +784,17 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section active" id="h4-overview">
       <div class="kpi-grid" id="h4-kpis"></div>
       <div class="section-card">
-        <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Levels of care mix (all levels of care)</h4>
-        <div class="chart-wrap"><canvas id="h4-program"></canvas></div>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Levels of care mix (all levels of care)</span>
+          <label class="fc-toggle">
+            <input type="checkbox" id="h4-program-toggle" onchange="toggleProgramLabels('h4', this.checked)">
+            <span class="fc-toggle-slider"></span>
+            <span>Show values</span>
+          </label>
+        </h4>
+        <div class="chart-wrap" style="height:214px"><canvas id="h4-program"></canvas></div>
       </div>
-      <div class="two-col">
+      <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#764a9d"></i> <span id="h4-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h4-donut"></canvas></div>
@@ -1636,24 +1666,46 @@ function buildProgram(hid, hosp, color) {
   const labels = PROGRAM_TYPES.filter(p => pm[p]).concat(Object.keys(pm).filter(p=>!PROGRAM_TYPES.includes(p)));
   const vals = labels.map(l=>pm[l].los);
   const netVals = labels.map(l=>pm[l].net);
+  const totalLos = vals.reduce((a,b)=>a+b,0);
+  const totalNet = netVals.reduce((a,b)=>a+b,0);
+  const labelsOn = !!programLabelsOn[hid];
   makeChart(hid+'-program', {
     type:'bar',
     data:{
       labels,
       datasets:[
-        {label:'Patient Days',data:vals,backgroundColor:color+'cc',yAxisID:'y'},
-        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1'},
+        {label:'Patient Days',data:vals,backgroundColor:color+'cc',yAxisID:'y',
+          datalabels:{
+            display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+            font:{size:10,weight:'600'},
+            formatter:v=>[fmtN(v), `(${fmtPct(totalLos ? v/totalLos*100 : 0)})`]
+          }},
+        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#1c988c88',yAxisID:'y1',
+          datalabels:{
+            display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+            font:{size:10,weight:'600'},
+            formatter:v=>[fmtDollar(v), `(${fmtPct(totalNet ? v/totalNet*100 : 0)})`]
+          }},
       ]
     },
     options:{
-      responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:dualAxisLabel}}},
+      responsive:true,maintainAspectRatio:false,
+      layout:{padding:{top:labelsOn?26:0}},
+      plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{enabled:!labelsOn,callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{position:'left',title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
         y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
       }
     }
   });
+}
+
+const programLabelsOn = {};
+function toggleProgramLabels(hid, on) {
+  programLabelsOn[hid] = on;
+  const filter = getFilter(hid, 'overview');
+  const yearHosp = aggregateRecords(filterRecords(hid, {year: filter.year}));
+  buildProgram(hid, yearHosp, HOSPITALS_CFG.find(x=>x.id===hid).color);
 }
 
 // ===== PAYOR MIX + PATIENT DAYS + EXPECTED REIMBURSEMENT, BY PROGRAM TYPE =====
