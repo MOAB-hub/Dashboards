@@ -1698,8 +1698,8 @@ function buildDonut(hid, hosp, color, filter) {
 }
 
 // ===== PROGRAM MIX =====
-// Fixed brand colors (Lifepoint Purple / Lifepoint Magenta), not tied to the
-// hospital's own facility color — kept deliberately distinct from the Blue/Teal
+// Fixed brand colors (Lifepoint Green / Lifepoint Blue), not tied to the
+// hospital's own facility color — kept deliberately distinct from the Magenta/Teal
 // pair used by the Payor mix, patient days & expected reimbursement chart so the
 // two charts never read as the same series when viewed side by side.
 function buildProgram(hid, hosp) {
@@ -1715,13 +1715,13 @@ function buildProgram(hid, hosp) {
     data:{
       labels,
       datasets:[
-        {label:'Patient Days',data:vals,backgroundColor:'#764a9dcc',yAxisID:'y',
+        {label:'Patient Days',data:vals,backgroundColor:'#58b647cc',yAxisID:'y',
           datalabels:{
             display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
             font:{size:10,weight:'600'},
             formatter:v=>[fmtN(v), `(${fmtPct(totalLos ? v/totalLos*100 : 0)})`]
           }},
-        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#a5228a88',yAxisID:'y1',
+        {label:'Expected Reimbursement',data:netVals,backgroundColor:'#306cb488',yAxisID:'y1',
           datalabels:{
             display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
             font:{size:10,weight:'600'},
@@ -1769,7 +1769,7 @@ function buildFcComboChart(hid, hosp, filter) {
     data:{
       labels,
       datasets:[
-        {label:'Patient Days',data:vals,backgroundColor:'#306cb4cc',yAxisID:'y',
+        {label:'Patient Days',data:vals,backgroundColor:'#a5228acc',yAxisID:'y',
           datalabels:{
             display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
             font:{size:10,weight:'600'},
