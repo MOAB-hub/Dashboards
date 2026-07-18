@@ -314,7 +314,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h1','payor-mix',this)">Payor Mix</button>
     <button onclick="showTab('h1','rolling-net',this)">Top 5 Health Plans</button>
     <button onclick="showTab('h1','covered-lives',this)">Covered Lives</button>
-    <button onclick="showTab('h1','regional',this)">Regional</button>
     <button onclick="showTab('h1','insights',this)">Exec Insights</button>
     <button onclick="showTab('h1','assessment',this)">Assessment Tool</button>
   </div>
@@ -411,18 +410,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- REGIONAL TAB -->
-    <div class="tab-section" id="h1-regional">
-      <div class="section-card">
-        <h4><i class="bi bi-map-fill" style="color:#306cb4"></i> Regional roll-up — Central region</h4>
-        <div class="region-grid" id="h1-region-grid"></div>
-      </div>
-      <div class="section-card" style="margin-top:20px">
-        <h4><i class="bi bi-bar-chart" style="color:#306cb4"></i> Regional facility comparison</h4>
-        <div class="chart-wrap" style="height:300px"><canvas id="h1-region-chart"></canvas></div>
-      </div>
-    </div>
-
     <!-- EXEC INSIGHTS TAB -->
     <div class="tab-section" id="h1-insights">
       <div class="section-card">
@@ -468,7 +455,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h2','payor-mix',this)">Payor Mix</button>
     <button onclick="showTab('h2','rolling-net',this)">Top 5 Health Plans</button>
     <button onclick="showTab('h2','covered-lives',this)">Covered Lives</button>
-    <button onclick="showTab('h2','regional',this)">Regional</button>
     <button onclick="showTab('h2','insights',this)">Exec Insights</button>
     <button onclick="showTab('h2','assessment',this)">Assessment Tool</button>
   </div>
@@ -565,18 +551,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- REGIONAL TAB -->
-    <div class="tab-section" id="h2-regional">
-      <div class="section-card">
-        <h4><i class="bi bi-map-fill" style="color:#58b647"></i> Regional roll-up — Central region</h4>
-        <div class="region-grid" id="h2-region-grid"></div>
-      </div>
-      <div class="section-card" style="margin-top:20px">
-        <h4><i class="bi bi-bar-chart" style="color:#58b647"></i> Regional facility comparison</h4>
-        <div class="chart-wrap" style="height:300px"><canvas id="h2-region-chart"></canvas></div>
-      </div>
-    </div>
-
     <!-- EXEC INSIGHTS TAB -->
     <div class="tab-section" id="h2-insights">
       <div class="section-card">
@@ -622,7 +596,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h3','payor-mix',this)">Payor Mix</button>
     <button onclick="showTab('h3','rolling-net',this)">Top 5 Health Plans</button>
     <button onclick="showTab('h3','covered-lives',this)">Covered Lives</button>
-    <button onclick="showTab('h3','regional',this)">Regional</button>
     <button onclick="showTab('h3','insights',this)">Exec Insights</button>
     <button onclick="showTab('h3','assessment',this)">Assessment Tool</button>
   </div>
@@ -719,18 +692,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       </div>
     </div>
 
-    <!-- REGIONAL TAB -->
-    <div class="tab-section" id="h3-regional">
-      <div class="section-card">
-        <h4><i class="bi bi-map-fill" style="color:#1c988c"></i> Regional roll-up — East region</h4>
-        <div class="region-grid" id="h3-region-grid"></div>
-      </div>
-      <div class="section-card" style="margin-top:20px">
-        <h4><i class="bi bi-bar-chart" style="color:#1c988c"></i> Regional facility comparison</h4>
-        <div class="chart-wrap" style="height:300px"><canvas id="h3-region-chart"></canvas></div>
-      </div>
-    </div>
-
     <!-- EXEC INSIGHTS TAB -->
     <div class="tab-section" id="h3-insights">
       <div class="section-card">
@@ -776,7 +737,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <button onclick="showTab('h4','payor-mix',this)">Payor Mix</button>
     <button onclick="showTab('h4','rolling-net',this)">Top 5 Health Plans</button>
     <button onclick="showTab('h4','covered-lives',this)">Covered Lives</button>
-    <button onclick="showTab('h4','regional',this)">Regional</button>
     <button onclick="showTab('h4','insights',this)">Exec Insights</button>
     <button onclick="showTab('h4','assessment',this)">Assessment Tool</button>
   </div>
@@ -870,18 +830,6 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
             <tbody></tbody>
           </table></div>
         </div>
-      </div>
-    </div>
-
-    <!-- REGIONAL TAB -->
-    <div class="tab-section" id="h4-regional">
-      <div class="section-card">
-        <h4><i class="bi bi-map-fill" style="color:#764a9d"></i> Regional roll-up — East region</h4>
-        <div class="region-grid" id="h4-region-grid"></div>
-      </div>
-      <div class="section-card" style="margin-top:20px">
-        <h4><i class="bi bi-bar-chart" style="color:#764a9d"></i> Regional facility comparison</h4>
-        <div class="chart-wrap" style="height:300px"><canvas id="h4-region-chart"></canvas></div>
       </div>
     </div>
 
@@ -1307,7 +1255,6 @@ function rebuildSection(hid, section) {
     overview: buildOverview,
     payorMix: buildPayorMixSection,
     rollingNet: buildRollingNetSection,
-    regional: buildRegionalSection,
     insights: buildInsightsSection,
     assessment: buildAssessmentSection,
     regiondash: buildRegionDashboard
@@ -1520,7 +1467,6 @@ function buildDashboard(hid) {
   buildPayorMixSection(hid);
   buildRollingNetSection(hid);
   buildCoveredLives(hid, h.color);
-  buildRegionalSection(hid);
   buildInsightsSection(hid);
   buildAssessmentSection(hid);
 }
@@ -1912,19 +1858,18 @@ function buildCoveredLives(hid, color) {
   </tr>`).join('');
 }
 
-// ===== REGIONAL (Program Type filter — recomputes each facility's totals for that type;
+// ===== REGIONAL ROLL-UP (Program Type filter — recomputes each facility's totals for that type;
 // scoped to facilities in the same region, plus VP/CEO/CFO leadership from Hospital Region Info) =====
-// regionCardHTML / renderRegionCards / renderRegionChart are shared by the per-hospital
-// "Regional" tab (buildRegionalSection, highlights the logged-in facility) and the
-// standalone region-portal dashboard (buildRegionDashboard, no facility highlighted).
-function regionCardHTML(fac, fd, isThis) {
+// Used only by the standalone region-portal dashboard (buildRegionDashboard below) — hospital
+// leaders no longer have a "Regional" tab on their own dashboard (removed 2026-07-18).
+function regionCardHTML(fac, fd) {
   const hcfg = HOSPITALS_CFG.find(x=>x.facility===fac);
   const col = hcfg ? hcfg.color : '#306cb4';
   const entityName = FACILITY_REGION_MAP[fac];
   const ri = entityName ? REGIONAL_INFO.find(r=>r.name && r.name.trim()===entityName) : null;
-  return `<div class="region-card" style="border-top-color:${col};${isThis?'box-shadow:0 4px 20px rgba(0,0,0,.15);':''}">
+  return `<div class="region-card" style="border-top-color:${col}">
     <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:${col};letter-spacing:.5px;margin-bottom:6px">
-      ${isThis?'&#9679; ':''}&nbsp;${fac}
+      &nbsp;${fac}
     </div>
     <div style="font-size:.82rem;color:#666;margin-bottom:10px">${ri?.location||hcfg?.location||''}${ri?.region?' | '+ri.region+' Region':''}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:${ri?'10px':'0'}">
@@ -1942,9 +1887,9 @@ function regionCardHTML(fac, fd, isThis) {
   </div>`;
 }
 
-function renderRegionCards(gridId, facTotals, regionFacs, highlightFacility) {
+function renderRegionCards(gridId, facTotals, regionFacs) {
   document.getElementById(gridId).innerHTML =
-    regionFacs.map(fac => regionCardHTML(fac, facTotals[fac], fac===highlightFacility)).join('');
+    regionFacs.map(fac => regionCardHTML(fac, facTotals[fac])).join('');
 }
 
 function renderRegionChart(chartId, facTotals, regionFacs) {
@@ -1968,22 +1913,6 @@ function renderRegionChart(chartId, facTotals, regionFacs) {
   });
 }
 
-function buildRegionalSection(hid) {
-  const h = HOSPITALS_CFG.find(x=>x.id===hid);
-  const filter = getFilter(hid, 'regional');
-  const container = document.getElementById(hid+'-regional');
-  injectFilterBar(container, hid, 'regional', h.color, false);
-
-  const regionFacs = HOSPITALS_CFG.filter(x => x.region === h.region).map(x => x.facility);
-  const facTotals = {};
-  regionFacs.forEach(fac => {
-    const recs = RAW_DATA.filter(r => r.f === fac && (filter.programType === 'All' || r.pt === filter.programType));
-    facTotals[fac] = aggregateRecords(recs).totals;
-  });
-  renderRegionCards(hid+'-region-grid', facTotals, regionFacs, h.facility);
-  renderRegionChart(hid+'-region-chart', facTotals, regionFacs);
-}
-
 // ===== STANDALONE REGION DASHBOARD (region-portal login, not tied to any one facility) =====
 function buildRegionDashboard(rid) {
   const r = REGIONS_CFG.find(x=>x.id===rid);
@@ -2003,7 +1932,7 @@ function buildRegionDashboard(rid) {
     const recs = RAW_DATA.filter(rec => rec.f === fac && (filter.programType === 'All' || rec.pt === filter.programType));
     facTotals[fac] = aggregateRecords(recs).totals;
   });
-  renderRegionCards(rid+'-region-grid', facTotals, regionFacs, null);
+  renderRegionCards(rid+'-region-grid', facTotals, regionFacs);
   renderRegionChart(rid+'-region-chart', facTotals, regionFacs);
 }
 
