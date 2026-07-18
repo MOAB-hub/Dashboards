@@ -341,7 +341,8 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#306cb4"></i> <span id="h1-donut-title">Payor mix by patient days</span></h4>
-          <div class="chart-wrap" style="height:460px;margin-top:14px"><canvas id="h1-donut"></canvas></div>
+          <div class="chart-wrap" style="height:300px;margin-top:14px"><canvas id="h1-donut"></canvas></div>
+          <div id="h1-donut-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-top:32px"></div>
         </div>
         <div class="section-card">
           <h4 style="justify-content:space-between">
@@ -493,7 +494,8 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#58b647"></i> <span id="h2-donut-title">Payor mix by patient days</span></h4>
-          <div class="chart-wrap" style="height:460px;margin-top:14px"><canvas id="h2-donut"></canvas></div>
+          <div class="chart-wrap" style="height:300px;margin-top:14px"><canvas id="h2-donut"></canvas></div>
+          <div id="h2-donut-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-top:32px"></div>
         </div>
         <div class="section-card">
           <h4 style="justify-content:space-between">
@@ -645,7 +647,8 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#1c988c"></i> <span id="h3-donut-title">Payor mix by patient days</span></h4>
-          <div class="chart-wrap" style="height:460px;margin-top:14px"><canvas id="h3-donut"></canvas></div>
+          <div class="chart-wrap" style="height:300px;margin-top:14px"><canvas id="h3-donut"></canvas></div>
+          <div id="h3-donut-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-top:32px"></div>
         </div>
         <div class="section-card">
           <h4 style="justify-content:space-between">
@@ -797,7 +800,8 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
       <div class="two-col two-col-combo-wide">
         <div class="section-card">
           <h4><i class="bi bi-pie-chart-fill" style="color:#764a9d"></i> <span id="h4-donut-title">Payor mix by patient days</span></h4>
-          <div class="chart-wrap" style="height:460px;margin-top:14px"><canvas id="h4-donut"></canvas></div>
+          <div class="chart-wrap" style="height:300px;margin-top:14px"><canvas id="h4-donut"></canvas></div>
+          <div id="h4-donut-legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-top:32px"></div>
         </div>
         <div class="section-card">
           <h4 style="justify-content:space-between">
@@ -1654,11 +1658,15 @@ function buildDonut(hid, hosp, color, filter) {
       responsive:true, maintainAspectRatio:false, cutout:'45%',
       layout:{padding:{top:6}},
       plugins:{
-        legend:{position:'bottom',labels:{font:{size:11},boxWidth:12,padding:36}},
+        legend:{display:false},
         tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmtN(ctx.raw)} days (${fmtPct(total ? ctx.raw/total*100 : 0)})` }}
       }
     }
   });
+  document.getElementById(hid+'-donut-legend').innerHTML = labels.map((l,i) => `
+    <span style="display:flex;align-items:center;gap:6px;font-size:.75rem;color:#333">
+      <span style="width:11px;height:11px;border-radius:3px;background:${colors[i]};flex-shrink:0"></span>${l}
+    </span>`).join('');
 }
 
 // ===== PROGRAM MIX =====
