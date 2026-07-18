@@ -433,6 +433,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section" id="h1-assessment">
       <div class="section-card">
         <h4><i class="bi bi-clipboard-data-fill" style="color:#306cb4"></i> Payor assessment tool</h4>
+        <p style="font-size:.82rem;color:#666;margin-bottom:16px">Self Pay is not included as part of the Assessment Tool.</p>
         <table class="data-table" id="h1-assessment-table">
           <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
           <tbody></tbody>
@@ -577,6 +578,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section" id="h2-assessment">
       <div class="section-card">
         <h4><i class="bi bi-clipboard-data-fill" style="color:#58b647"></i> Payor assessment tool</h4>
+        <p style="font-size:.82rem;color:#666;margin-bottom:16px">Self Pay is not included as part of the Assessment Tool.</p>
         <table class="data-table" id="h2-assessment-table">
           <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
           <tbody></tbody>
@@ -721,6 +723,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section" id="h3-assessment">
       <div class="section-card">
         <h4><i class="bi bi-clipboard-data-fill" style="color:#1c988c"></i> Payor assessment tool</h4>
+        <p style="font-size:.82rem;color:#666;margin-bottom:16px">Self Pay is not included as part of the Assessment Tool.</p>
         <table class="data-table" id="h3-assessment-table">
           <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
           <tbody></tbody>
@@ -865,6 +868,7 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <div class="tab-section" id="h4-assessment">
       <div class="section-card">
         <h4><i class="bi bi-clipboard-data-fill" style="color:#764a9d"></i> Payor assessment tool</h4>
+        <p style="font-size:.82rem;color:#666;margin-bottom:16px">Self Pay is not included as part of the Assessment Tool.</p>
         <table class="data-table" id="h4-assessment-table">
           <thead><tr><th>Payor Name</th><th>Payor Type</th><th>Exp Reim PPD</th><th>Network Status</th></tr></thead>
           <tbody></tbody>
@@ -1229,15 +1233,18 @@ function getFilter(hid, section) {
 // Independent Financial Class filter (separate state per key, e.g. one for
 // the Top 5 Health Plans chart and a separate one for the Assessment Tool).
 const FINANCIAL_CLASSES = ["Commercial","Managed Medicaid","Medicaid","Medicare","Medicare Advantage","Other Governmental","Self Pay"];
+// Assessment Tool excludes Self Pay entirely (2026-07-18) — it stays available
+// everywhere else (e.g. Top 5 Health Plans, which uses FINANCIAL_CLASSES directly).
+const FINANCIAL_CLASSES_ASSESSMENT = FINANCIAL_CLASSES.filter(fc => fc !== 'Self Pay');
 const finClassFilters = {};
 function getFinClassFilter(hid, key) {
   const k = hid + '|' + key;
   if (!finClassFilters[k]) finClassFilters[k] = 'All';
   return finClassFilters[k];
 }
-function financialClassSelectorHTML(hid, key, color) {
+function financialClassSelectorHTML(hid, key, color, classes) {
   const cur = getFinClassFilter(hid, key);
-  const opts = ['All'].concat(FINANCIAL_CLASSES).map(fc =>
+  const opts = ['All'].concat(classes || FINANCIAL_CLASSES).map(fc =>
     `<option value="${fc}" ${cur===fc?'selected':''}>${fc==='All'?'All Financial Class':fc}</option>`
   ).join('');
   return `<div style="display:flex;align-items:center;gap:8px">
@@ -2086,9 +2093,9 @@ function buildAssessmentSection(hid) {
   const filter = getFilter(hid, 'assessment');
   const fc = getFinClassFilter(hid, 'assessment');
   const container = document.getElementById(hid+'-assessment');
-  injectFilterBar(container, hid, 'assessment', h.color, false, financialClassSelectorHTML(hid, 'assessment', h.color));
+  injectFilterBar(container, hid, 'assessment', h.color, false, financialClassSelectorHTML(hid, 'assessment', h.color, FINANCIAL_CLASSES_ASSESSMENT));
 
-  const recs = filterRecords(hid, {programType: filter.programType, financialClass: fc});
+  const recs = filterRecords(hid, {programType: filter.programType, financialClass: fc}).filter(r => r.fc !== 'Self Pay');
   const groupBy = (arr, key) => arr.reduce((g,r)=>{ (g[r[key]]=g[r[key]]||[]).push(r); return g; }, {});
   const payorGroups = groupBy(recs, 'p');
   const rows = Object.entries(payorGroups).map(([p, arr]) => {
