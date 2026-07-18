@@ -325,27 +325,27 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <!-- OVERVIEW TAB -->
     <div class="tab-section active" id="h1-overview">
       <div class="kpi-grid" id="h1-kpis"></div>
+      <div class="section-card">
+        <h4><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Levels of care mix (all levels of care)</h4>
+        <div class="chart-wrap"><canvas id="h1-program"></canvas></div>
+      </div>
       <div class="two-col">
         <div class="section-card">
-          <h4><i class="bi bi-pie-chart-fill" style="color:#306cb4"></i> Payor mix by patient days</h4>
+          <h4><i class="bi bi-pie-chart-fill" style="color:#306cb4"></i> <span id="h1-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h1-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#306cb4"></i> Level of care mix</h4>
-          <div class="chart-wrap"><canvas id="h1-program"></canvas></div>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h1-fc-combo-toggle" onchange="toggleFcComboLabels('h1', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
+          <div class="fc-combo-summary" id="h1-fc-combo-summary"></div>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="h1-fc-combo"></canvas></div>
         </div>
-      </div>
-      <div class="section-card">
-        <h4 style="justify-content:space-between">
-          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#306cb4"></i> <span id="h1-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
-          <label class="fc-toggle">
-            <input type="checkbox" id="h1-fc-combo-toggle" onchange="toggleFcComboLabels('h1', this.checked)">
-            <span class="fc-toggle-slider"></span>
-            <span>Show values</span>
-          </label>
-        </h4>
-        <div class="fc-combo-summary" id="h1-fc-combo-summary"></div>
-        <div class="chart-wrap chart-wrap-tall"><canvas id="h1-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#306cb4"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -470,27 +470,27 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <!-- OVERVIEW TAB -->
     <div class="tab-section active" id="h2-overview">
       <div class="kpi-grid" id="h2-kpis"></div>
+      <div class="section-card">
+        <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Levels of care mix (all levels of care)</h4>
+        <div class="chart-wrap"><canvas id="h2-program"></canvas></div>
+      </div>
       <div class="two-col">
         <div class="section-card">
-          <h4><i class="bi bi-pie-chart-fill" style="color:#58b647"></i> Payor mix by patient days</h4>
+          <h4><i class="bi bi-pie-chart-fill" style="color:#58b647"></i> <span id="h2-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h2-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#58b647"></i> Level of care mix</h4>
-          <div class="chart-wrap"><canvas id="h2-program"></canvas></div>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h2-fc-combo-toggle" onchange="toggleFcComboLabels('h2', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
+          <div class="fc-combo-summary" id="h2-fc-combo-summary"></div>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="h2-fc-combo"></canvas></div>
         </div>
-      </div>
-      <div class="section-card">
-        <h4 style="justify-content:space-between">
-          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#58b647"></i> <span id="h2-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
-          <label class="fc-toggle">
-            <input type="checkbox" id="h2-fc-combo-toggle" onchange="toggleFcComboLabels('h2', this.checked)">
-            <span class="fc-toggle-slider"></span>
-            <span>Show values</span>
-          </label>
-        </h4>
-        <div class="fc-combo-summary" id="h2-fc-combo-summary"></div>
-        <div class="chart-wrap chart-wrap-tall"><canvas id="h2-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#58b647"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -615,27 +615,27 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <!-- OVERVIEW TAB -->
     <div class="tab-section active" id="h3-overview">
       <div class="kpi-grid" id="h3-kpis"></div>
+      <div class="section-card">
+        <h4><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Levels of care mix (all levels of care)</h4>
+        <div class="chart-wrap"><canvas id="h3-program"></canvas></div>
+      </div>
       <div class="two-col">
         <div class="section-card">
-          <h4><i class="bi bi-pie-chart-fill" style="color:#1c988c"></i> Payor mix by patient days</h4>
+          <h4><i class="bi bi-pie-chart-fill" style="color:#1c988c"></i> <span id="h3-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h3-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#1c988c"></i> Level of care mix</h4>
-          <div class="chart-wrap"><canvas id="h3-program"></canvas></div>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h3-fc-combo-toggle" onchange="toggleFcComboLabels('h3', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
+          <div class="fc-combo-summary" id="h3-fc-combo-summary"></div>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="h3-fc-combo"></canvas></div>
         </div>
-      </div>
-      <div class="section-card">
-        <h4 style="justify-content:space-between">
-          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#1c988c"></i> <span id="h3-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
-          <label class="fc-toggle">
-            <input type="checkbox" id="h3-fc-combo-toggle" onchange="toggleFcComboLabels('h3', this.checked)">
-            <span class="fc-toggle-slider"></span>
-            <span>Show values</span>
-          </label>
-        </h4>
-        <div class="fc-combo-summary" id="h3-fc-combo-summary"></div>
-        <div class="chart-wrap chart-wrap-tall"><canvas id="h3-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#1c988c"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -760,27 +760,27 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
     <!-- OVERVIEW TAB -->
     <div class="tab-section active" id="h4-overview">
       <div class="kpi-grid" id="h4-kpis"></div>
+      <div class="section-card">
+        <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Levels of care mix (all levels of care)</h4>
+        <div class="chart-wrap"><canvas id="h4-program"></canvas></div>
+      </div>
       <div class="two-col">
         <div class="section-card">
-          <h4><i class="bi bi-pie-chart-fill" style="color:#764a9d"></i> Payor mix by patient days</h4>
+          <h4><i class="bi bi-pie-chart-fill" style="color:#764a9d"></i> <span id="h4-donut-title">Payor mix by patient days</span></h4>
           <div class="chart-wrap"><canvas id="h4-donut"></canvas></div>
         </div>
         <div class="section-card">
-          <h4><i class="bi bi-bar-chart-fill" style="color:#764a9d"></i> Level of care mix</h4>
-          <div class="chart-wrap"><canvas id="h4-program"></canvas></div>
+          <h4 style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
+            <label class="fc-toggle">
+              <input type="checkbox" id="h4-fc-combo-toggle" onchange="toggleFcComboLabels('h4', this.checked)">
+              <span class="fc-toggle-slider"></span>
+              <span>Show values</span>
+            </label>
+          </h4>
+          <div class="fc-combo-summary" id="h4-fc-combo-summary"></div>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="h4-fc-combo"></canvas></div>
         </div>
-      </div>
-      <div class="section-card">
-        <h4 style="justify-content:space-between">
-          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-diagram-3-fill" style="color:#764a9d"></i> <span id="h4-fc-combo-title">Payor mix, patient days &amp; expected reimbursement</span></span>
-          <label class="fc-toggle">
-            <input type="checkbox" id="h4-fc-combo-toggle" onchange="toggleFcComboLabels('h4', this.checked)">
-            <span class="fc-toggle-slider"></span>
-            <span>Show values</span>
-          </label>
-        </h4>
-        <div class="fc-combo-summary" id="h4-fc-combo-summary"></div>
-        <div class="chart-wrap chart-wrap-tall"><canvas id="h4-fc-combo"></canvas></div>
       </div>
       <div class="section-card">
         <h4><i class="bi bi-graph-up" style="color:#764a9d"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
@@ -1575,7 +1575,7 @@ function buildOverview(hid) {
   injectFilterBar(container, hid, 'overview', h.color, true);
 
   buildKPIs(hid, hosp, h.color);
-  buildDonut(hid, hosp, h.color);
+  buildDonut(hid, hosp, h.color, filter);
   // Program Type Mix chart always reflects the full program breakdown for the selected year
   const yearHosp = aggregateRecords(filterRecords(hid, {year: filter.year}));
   buildProgram(hid, yearHosp, h.color);
@@ -1605,7 +1605,9 @@ function buildKPIs(hid, hosp, color) {
 }
 
 // ===== DONUT =====
-function buildDonut(hid, hosp, color) {
+function buildDonut(hid, hosp, color, filter) {
+  const ptLabel = filter.programType === 'All' ? 'All Levels of Care' : filter.programType;
+  document.getElementById(hid+'-donut-title').textContent = `Payor mix by patient days — ${ptLabel}`;
   const pm = hosp.payor_mix;
   const labels = Object.keys(pm).sort((a,b)=>pm[b].pct-pm[a].pct);
   const vals = labels.map(l=>pm[l].los);
