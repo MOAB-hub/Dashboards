@@ -358,7 +358,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-graph-up" style="color:#306cb4"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-graph-up" style="color:#306cb4"></i> Quarterly trend — patient days &amp; expected reimbursement</span>
+          <span id="h1-trend-fc-filter"></span>
+        </h4>
         <div class="chart-wrap"><canvas id="h1-trend"></canvas></div>
       </div>
     </div>
@@ -518,7 +521,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-graph-up" style="color:#58b647"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-graph-up" style="color:#58b647"></i> Quarterly trend — patient days &amp; expected reimbursement</span>
+          <span id="h2-trend-fc-filter"></span>
+        </h4>
         <div class="chart-wrap"><canvas id="h2-trend"></canvas></div>
       </div>
     </div>
@@ -678,7 +684,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-graph-up" style="color:#1c988c"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-graph-up" style="color:#1c988c"></i> Quarterly trend — patient days &amp; expected reimbursement</span>
+          <span id="h3-trend-fc-filter"></span>
+        </h4>
         <div class="chart-wrap"><canvas id="h3-trend"></canvas></div>
       </div>
     </div>
@@ -838,7 +847,10 @@ h1, h2, h3, h4 { font-family: var(--font-headline); letter-spacing:-.01em; }
         </div>
       </div>
       <div class="section-card">
-        <h4><i class="bi bi-graph-up" style="color:#764a9d"></i> Quarterly trend — patient days &amp; expected reimbursement</h4>
+        <h4 style="justify-content:space-between">
+          <span style="display:flex;align-items:center;gap:8px"><i class="bi bi-graph-up" style="color:#764a9d"></i> Quarterly trend — patient days &amp; expected reimbursement</span>
+          <span id="h4-trend-fc-filter"></span>
+        </h4>
         <div class="chart-wrap"><canvas id="h4-trend"></canvas></div>
       </div>
     </div>
@@ -1133,12 +1145,13 @@ const FC_COLORS = {
   "Self Pay": "#414042"
 };
 const CHART_PALETTE = ["#306cb4","#58b647","#1c988c","#764a9d","#a5228a","#00afe9","#febe10"];
-// Universal series colors (2026-07-19): every chart with a flat (non-per-category)
-// "Patient Days" / "Expected Reimbursement" series pair uses these two colors,
-// dashboard-wide — darker blue for Patient Days, Lifepoint Green for Expected
-// Reimbursement. PATIENT_DAYS_COLOR is Lifepoint Blue #306cb4 darkened ~40%.
+// Universal series colors (2026-07-19, updated same day): every chart with a flat
+// (non-per-category) "Patient Days" / "Expected Reimbursement" series pair uses
+// these two colors, dashboard-wide. Both are literal Lifepoint FC_COLORS values,
+// reused deliberately — Commercial's blue for Patient Days, Medicare's green for
+// Expected Reimbursement (Medicare green already equaled the prior custom shade).
 // Don't recolor these two series independently per chart without asking first.
-const PATIENT_DAYS_COLOR = '#1d416c';
+const PATIENT_DAYS_COLOR = '#306cb4';
 const EXPECTED_REIMBURSEMENT_COLOR = '#58b647';
 
 const HOSPITALS_CFG = [{"id":"h1","facility":"Carrollton Springs","leader":"Donald Duck","password":"dduck","color":"#306cb4","colorLight":"#e5edf7","region":"Central","location":"Carrollton, TX"},{"id":"h2","facility":"Collin Springs","leader":"John Smith","password":"jsmith","color":"#58b647","colorLight":"#eaf6e7","region":"Central","location":"Carrollton, TX"},{"id":"h3","facility":"Columbus Springs Dublin","leader":"Brooke Hogan","password":"bhogan","color":"#1c988c","colorLight":"#e2f3f1","region":"East","location":"Dublin, OH"},{"id":"h4","facility":"Columbus Springs East","leader":"Mickey Mouse","password":"mmouse","color":"#764a9d","colorLight":"#ece5f3","region":"East","location":"Columbus, OH"}];
@@ -1396,7 +1409,8 @@ function rebuildSection(hid, section) {
     rollingNet: buildRollingNetSection,
     insights: buildInsightsSection,
     assessment: buildAssessmentSection,
-    regiondash: buildRegionDashboard
+    regiondash: buildRegionDashboard,
+    trend: rebuildTrendChart
   };
   if (map[section]) map[section](hid);
 }
@@ -1787,6 +1801,7 @@ function buildFcComboChart(hid, hosp, filter) {
   const labels = Object.keys(pm).sort((a,b)=>pm[b].pct-pm[a].pct);
   const vals = labels.map(l=>pm[l].los);
   const netVals = labels.map(l=>pm[l].net);
+  const ppdVals = labels.map(l=>pm[l].rev_per_day);
   const labelsOn = !!fcComboLabelsOn[hid];
   makeChart(hid+'-fc-combo', {
     type:'bar',
@@ -1805,6 +1820,12 @@ function buildFcComboChart(hid, hosp, filter) {
             font:{size:10,weight:'600'},
             formatter:v=>[fmtDollar(v), `(${fmtPct(t.net ? v/t.net*100 : 0)})`]
           }},
+        {label:'Exp Reim PPD',type:'line',data:ppdVals,borderColor:'#a5228a',backgroundColor:'#a5228a',yAxisID:'y2',tension:.3,pointRadius:5,
+          datalabels:{
+            display:labelsOn, color:'#000', anchor:'end', align:'end', offset:2, clamp:true,
+            font:{size:10,weight:'600'},
+            formatter:v=>fmtDollar(v)
+          }},
       ]
     },
     options:{
@@ -1812,11 +1833,12 @@ function buildFcComboChart(hid, hosp, filter) {
       layout:{padding:{top:labelsOn?26:0}},
       plugins:{
         legend:{position:'top',labels:{font:{size:11}}},
-        tooltip:{enabled:!labelsOn,callbacks:{label:dualAxisLabel}},
+        tooltip:{enabled:!labelsOn,callbacks:{label:ctx=>ctx.dataset.yAxisID==='y'?` ${ctx.dataset.label}: ${fmtN(ctx.raw)} days`:` ${ctx.dataset.label}: ${fmtDollar(ctx.raw)}`}},
       },
       scales:{
         y:{position:'left',title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
-        y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
+        y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}},
+        y2:{display:false}
       }
     }
   });
@@ -1832,20 +1854,25 @@ function toggleFcComboLabels(hid, on) {
 
 // ===== QUARTERLY TREND =====
 function buildTrend(hid, filter, color) {
+  document.getElementById(hid+'-trend-fc-filter').innerHTML = financialClassSelectorHTML(hid, 'trend', color);
   // Rolling 6-quarter window — spans years, so pull records by Program Type only
   // (not by the Year toggle) and let the window itself decide which quarters appear.
   const qs = trendQuarterWindow(filter.year);
-  const recs = filterRecords(hid, {programType: filter.programType});
+  const fc = getFinClassFilter(hid, 'trend');
+  const recs = filterRecords(hid, {programType: filter.programType, financialClass: fc});
   const agg = (arr, field) => arr.reduce((s,r)=>s+(r[field]||0), 0);
   const los = qs.map(q => agg(recs.filter(r=>r.q===q), 'los'));
-  const net = qs.map(q => round2(agg(recs.filter(r=>r.q===q), 'n')));
+  const netPpd = qs.map((q,i) => {
+    const qNet = agg(recs.filter(r=>r.q===q), 'n');
+    return los[i] ? Math.round(qNet/los[i]*100)/100 : 0;
+  });
   makeChart(hid+'-trend', {
     type:'bar',
     data:{
       labels:qs,
       datasets:[
         {type:'bar',label:'Patient Days',data:los,backgroundColor:PATIENT_DAYS_COLOR,yAxisID:'y',order:2},
-        {type:'line',label:'Expected Reimbursement',data:net,borderColor:EXPECTED_REIMBURSEMENT_COLOR,yAxisID:'y1',order:1,tension:.3,fill:false,pointRadius:5},
+        {type:'line',label:'Expected Reimbursement PPD',data:netPpd,borderColor:EXPECTED_REIMBURSEMENT_COLOR,yAxisID:'y1',order:1,tension:.3,fill:false,pointRadius:5},
       ]
     },
     options:{
@@ -1853,10 +1880,14 @@ function buildTrend(hid, filter, color) {
       plugins:{legend:{position:'top'},tooltip:{callbacks:{label:dualAxisLabel}}},
       scales:{
         y:{title:{display:true,text:'Patient Days'},ticks:{callback:v=>fmtN(v)}},
-        y1:{position:'right',title:{display:true,text:'Expected Reimbursement'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
+        y1:{position:'right',title:{display:true,text:'Expected Reimbursement PPD'},grid:{drawOnChartArea:false},ticks:{callback:v=>fmtDollar(v)}}
       }
     }
   });
+}
+function rebuildTrendChart(hid) {
+  const h = HOSPITALS_CFG.find(x=>x.id===hid);
+  buildTrend(hid, getFilter(hid, 'overview'), h.color);
 }
 
 // ===== PAYOR MIX (Program Type filter) =====
